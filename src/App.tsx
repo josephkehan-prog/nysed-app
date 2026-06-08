@@ -1,11 +1,21 @@
+import { lazy, Suspense } from 'react';
 import { Toolbar } from './nextera/Toolbar';
 import { Calculator } from './components/Calculator';
-import { GraphPlot } from './components/GraphPlot';
 import { MathText } from './components/MathText';
-import { ScratchPad } from './components/ScratchPad';
-import { WritingSpace } from './components/WritingSpace';
-import { MathField } from './components/MathField';
 import { AccommodationsBar } from './components/AccommodationsBar';
+
+// Heavy tool libraries (Excalidraw, Mafs, Tiptap, MathLive) are code-split so the
+// app shell paints first instead of shipping one multi-MB bundle.
+const GraphPlot = lazy(() => import('./components/GraphPlot').then((m) => ({ default: m.GraphPlot })));
+const MathField = lazy(() => import('./components/MathField').then((m) => ({ default: m.MathField })));
+const WritingSpace = lazy(() =>
+  import('./components/WritingSpace').then((m) => ({ default: m.WritingSpace })),
+);
+const ScratchPad = lazy(() => import('./components/ScratchPad').then((m) => ({ default: m.ScratchPad })));
+
+function Loading() {
+  return <p>Loading…</p>;
+}
 
 /** Nextera-style practice shell wiring the expansive tool suite together. */
 export function App() {
@@ -24,22 +34,30 @@ export function App() {
 
       <section>
         <h2>Graphing</h2>
-        <GraphPlot />
+        <Suspense fallback={<Loading />}>
+          <GraphPlot />
+        </Suspense>
       </section>
 
       <section>
         <h2>Equation entry</h2>
-        <MathField />
+        <Suspense fallback={<Loading />}>
+          <MathField />
+        </Suspense>
       </section>
 
       <section>
         <h2>Writing space</h2>
-        <WritingSpace />
+        <Suspense fallback={<Loading />}>
+          <WritingSpace />
+        </Suspense>
       </section>
 
       <section>
         <h2>Scratch paper</h2>
-        <ScratchPad />
+        <Suspense fallback={<Loading />}>
+          <ScratchPad />
+        </Suspense>
       </section>
 
       <section>
