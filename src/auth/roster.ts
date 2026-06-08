@@ -51,11 +51,34 @@ export const MOCK_ROSTER: Roster = [
   },
 ];
 
-// RED stub — replaced once the reproducer tests are confirmed failing.
+/**
+ * Look up a student by username (case-insensitive) and session access code.
+ * Both fields are trimmed first. Unknown username and wrong code return the same
+ * generic message so the form can't be used to enumerate valid usernames. The
+ * returned Student never carries the access code.
+ */
 export function authenticate(
-  _roster: Roster,
-  _username: string,
-  _sessionAccessCode: string,
+  roster: Roster,
+  username: string,
+  sessionAccessCode: string,
 ): AuthResult {
-  return { ok: false, error: 'not implemented' };
+  const user = username.trim();
+  const code = sessionAccessCode.trim();
+  if (!user || !code) {
+    return { ok: false, error: 'Enter your username and session access code.' };
+  }
+  const entry = roster.find(
+    (e) => e.username.toLowerCase() === user.toLowerCase() && e.sessionAccessCode === code,
+  );
+  if (!entry) {
+    return { ok: false, error: 'Username or session access code is incorrect.' };
+  }
+  const student: Student = {
+    username: entry.username,
+    firstName: entry.firstName,
+    lastName: entry.lastName,
+    grade: entry.grade,
+    domains: entry.domains,
+  };
+  return { ok: true, student };
 }

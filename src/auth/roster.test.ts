@@ -19,7 +19,7 @@ describe('authenticate — NYSED Nextera student sign-in', () => {
     const result = authenticate(MOCK_ROSTER, first.username, first.sessionAccessCode);
     expect(result.ok).toBe(true);
     if (result.ok) {
-      expect((result.student as Record<string, unknown>).sessionAccessCode).toBeUndefined();
+      expect((result.student as unknown as Record<string, unknown>).sessionAccessCode).toBeUndefined();
     }
   });
 

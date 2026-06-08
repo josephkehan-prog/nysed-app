@@ -26,11 +26,22 @@ export type PortalAction =
   | { type: 'select-domain'; domain: Subject }
   | { type: 'sign-out' };
 
-// RED stub — no transitions until the reproducer tests are confirmed failing.
-export function portalReducer(state: PortalState, _action: PortalAction): PortalState {
-  return state;
+export function portalReducer(state: PortalState, action: PortalAction): PortalState {
+  switch (action.type) {
+    case 'login': {
+      const result = authenticate(MOCK_ROSTER, action.username, action.sessionAccessCode);
+      if (!result.ok) {
+        return { step: 'login', student: null, domain: null, error: result.error };
+      }
+      return { step: 'domain', student: result.student, domain: null, error: null };
+    }
+    case 'select-domain':
+      // A domain can only be chosen after a student has signed in.
+      if (!state.student) return state;
+      return { ...state, step: 'test', domain: action.domain, error: null };
+    case 'sign-out':
+      return initialPortalState;
+    default:
+      return state;
+  }
 }
-
-// Referenced so the stub file compiles with the same imports the real impl uses.
-void authenticate;
-void MOCK_ROSTER;
