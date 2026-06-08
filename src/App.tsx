@@ -6,6 +6,7 @@ import { AccommodationsBar } from './components/AccommodationsBar';
 import { LoginPortal } from './auth/LoginPortal';
 import { DomainSelect } from './auth/DomainSelect';
 import { portalReducer, initialPortalState } from './auth/flow';
+import { DOMAIN_LABELS } from './auth/roster';
 import type { Subject } from './nextera/tools';
 
 // Heavy tool libraries (Excalidraw, Mafs, Tiptap, MathLive) are code-split so the
@@ -20,11 +21,6 @@ const ScratchPad = lazy(() => import('./components/ScratchPad').then((m) => ({ d
 function Loading() {
   return <p>Loading…</p>;
 }
-
-const DOMAIN_LABELS: Record<Subject, string> = {
-  math: 'Mathematics',
-  ela: 'English Language Arts',
-};
 
 interface TestShellProps {
   studentName: string;

@@ -1,10 +1,5 @@
-import type { Student } from './roster';
+import { DOMAIN_LABELS, type Student } from './roster';
 import type { Subject } from '../nextera/tools';
-
-const DOMAIN_LABELS: Record<Subject, string> = {
-  math: 'Mathematics',
-  ela: 'English Language Arts',
-};
 
 export interface DomainSelectProps {
   student: Student;

@@ -19,6 +19,12 @@ export interface RosterEntry extends Student {
 
 export type Roster = RosterEntry[];
 
+/** Human-readable names for each subject domain, shown in the picker and header. */
+export const DOMAIN_LABELS: Record<Subject, string> = {
+  math: 'Mathematics',
+  ela: 'English Language Arts',
+};
+
 export type AuthResult =
   | { ok: true; student: Student }
   | { ok: false; error: string };
