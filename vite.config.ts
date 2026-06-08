@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -25,4 +25,11 @@ if (!process.env.VITEST) {
   );
 }
 
-export default defineConfig({ plugins });
+export default defineConfig({
+  plugins,
+  test: {
+    setupFiles: ['./vitest.setup.ts'],
+    // Don't collect the nested merged worktree copy when run from the main checkout.
+    exclude: ['**/node_modules/**', '**/dist/**', '**/.git/**', '**/.claude/**'],
+  },
+});
