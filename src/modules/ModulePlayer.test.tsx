@@ -1,0 +1,64 @@
+// @vitest-environment jsdom
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { ModulePlayer } from './ModulePlayer';
+import type { LearningModule } from './types';
+
+afterEach(cleanup);
+
+const exploreMod: LearningModule = {
+  meta: {
+    id: 'e',
+    domain: 'math',
+    cluster: '6.G',
+    standards: ['6.G.A'],
+    title: 'Painting a Barn',
+    kind: 'explore',
+    source: { name: 'IM', license: 'CC BY-NC-SA 4.0', attribution: 'Illustrative Mathematics' },
+  },
+  items: [{ stem: 'How much paint?', interactionType: 'text', workedSolution: 'It costs $532.' }],
+};
+
+const practiceMod: LearningModule = {
+  meta: {
+    id: 'p',
+    domain: 'math',
+    cluster: '6.RP',
+    standards: ['6.RP.A.3'],
+    title: 'Unit Rate',
+    kind: 'practice',
+    source: { name: 'S', license: 'CC BY 4.0', attribution: 'S' },
+  },
+  items: [{ stem: '120 miles in 3 hours?', interactionType: 'numeric', answer: { type: 'numeric', value: 40 } }],
+};
+
+describe('ModulePlayer', () => {
+  it('explore: reveals the worked solution on demand', () => {
+    render(<ModulePlayer module={exploreMod} onExit={() => {}} />);
+    expect(screen.getByText('How much paint?')).toBeInTheDocument();
+    expect(screen.queryByText(/costs \$532/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /show worked solution/i }));
+    expect(screen.getByText(/costs \$532/)).toBeInTheDocument();
+  });
+
+  it('practice: marks a correct numeric answer', () => {
+    render(<ModulePlayer module={practiceMod} onExit={() => {}} />);
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '40' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Check' }));
+    expect(screen.getByRole('status')).toHaveTextContent(/correct/i);
+  });
+
+  it('practice: marks a wrong numeric answer', () => {
+    render(<ModulePlayer module={practiceMod} onExit={() => {}} />);
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '41' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Check' }));
+    expect(screen.getByRole('status')).toHaveTextContent(/not quite/i);
+  });
+
+  it('calls onExit from the Back button', () => {
+    const onExit = vi.fn();
+    render(<ModulePlayer module={exploreMod} onExit={onExit} />);
+    fireEvent.click(screen.getByRole('button', { name: /back/i }));
+    expect(onExit).toHaveBeenCalled();
+  });
+});

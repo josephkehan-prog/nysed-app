@@ -1,111 +1,43 @@
-import { lazy, Suspense, useReducer } from 'react';
-import { Toolbar } from './nextera/Toolbar';
-import { Calculator } from './components/Calculator';
-import { MathText } from './components/MathText';
-import { AccommodationsBar } from './components/AccommodationsBar';
+import { useReducer, useState } from 'react';
 import { LoginPortal } from './auth/LoginPortal';
 import { DomainSelect } from './auth/DomainSelect';
 import { portalReducer, initialPortalState } from './auth/flow';
 import { DOMAIN_LABELS } from './auth/roster';
-import { visibleSections } from './nextera/sections';
+import { ModuleCatalog } from './modules/ModuleCatalog';
+import { ModulePlayer } from './modules/ModulePlayer';
+import type { LearningModule } from './modules/types';
 import type { Subject } from './nextera/tools';
 
-// Heavy tool libraries (Excalidraw, Mafs, Tiptap, MathLive) are code-split so the
-// app shell paints first instead of shipping one multi-MB bundle.
-const GraphPlot = lazy(() => import('./components/GraphPlot').then((m) => ({ default: m.GraphPlot })));
-const MathField = lazy(() => import('./components/MathField').then((m) => ({ default: m.MathField })));
-const WritingSpace = lazy(() =>
-  import('./components/WritingSpace').then((m) => ({ default: m.WritingSpace })),
-);
-const ScratchPad = lazy(() => import('./components/ScratchPad').then((m) => ({ default: m.ScratchPad })));
-
-function Loading() {
-  return <p>Loading…</p>;
-}
-
-interface TestShellProps {
+interface DomainHomeProps {
+  domain: Subject;
   studentName: string;
-  grade: number;
-  subject: Subject;
   onSignOut: () => void;
 }
 
-/** The Nextera-style practice shell, entered only after sign-in and domain
- * selection. Tool availability follows the chosen grade/subject. */
-function TestShell({ studentName, grade, subject, onSignOut }: TestShellProps) {
-  const sections = visibleSections(subject);
+/** A domain's home: browse the module catalog, then play a chosen module. */
+function DomainHome({ domain, studentName, onSignOut }: DomainHomeProps) {
+  const [selected, setSelected] = useState<LearningModule | null>(null);
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16 }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <h1>NYSED Test Prep</h1>
+        <h1>{DOMAIN_LABELS[domain]}</h1>
         <span>
-          {studentName} · Grade {grade} · {DOMAIN_LABELS[subject]}{' '}
+          {studentName}{' '}
           <button type="button" onClick={onSignOut}>
             Sign out
           </button>
         </span>
       </header>
-      <AccommodationsBar />
-      <Toolbar grade={grade} session={2} subject={subject} />
-
-      <section>
-        <h2>Question</h2>
-        {subject === 'math' ? (
-          <p>
-            What is <MathText tex="\frac{1}{2} + \frac{1}{4}" />?
-          </p>
-        ) : (
-          <p>Read the passage, then explain how the author develops the central idea.</p>
-        )}
-      </section>
-
-      {sections.graphing ? (
-        <section>
-          <h2>Graphing</h2>
-          <Suspense fallback={<Loading />}>
-            <GraphPlot />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.equationEntry ? (
-        <section>
-          <h2>Equation entry</h2>
-          <Suspense fallback={<Loading />}>
-            <MathField />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.writingSpace ? (
-        <section>
-          <h2>Writing space</h2>
-          <Suspense fallback={<Loading />}>
-            <WritingSpace />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.scratchPaper ? (
-        <section>
-          <h2>Scratch paper</h2>
-          <Suspense fallback={<Loading />}>
-            <ScratchPad />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.calculator ? (
-        <section>
-          <h2>Calculator</h2>
-          <Calculator />
-        </section>
-      ) : null}
+      {selected ? (
+        <ModulePlayer module={selected} onExit={() => setSelected(null)} />
+      ) : (
+        <ModuleCatalog domain={domain} onOpen={setSelected} />
+      )}
     </main>
   );
 }
 
-/** Drives the sign-in flow: login → pick a subject domain → the test shell. */
+/** Drives the flow: login → choose a subject domain → that domain's modules. */
 export function App() {
   const [state, dispatch] = useReducer(portalReducer, initialPortalState);
 
@@ -120,10 +52,9 @@ export function App() {
 
   if (state.step === 'test' && state.student && state.domain) {
     return (
-      <TestShell
+      <DomainHome
+        domain={state.domain}
         studentName={state.student.firstName}
-        grade={state.student.grade}
-        subject={state.domain}
         onSignOut={() => dispatch({ type: 'sign-out' })}
       />
     );
