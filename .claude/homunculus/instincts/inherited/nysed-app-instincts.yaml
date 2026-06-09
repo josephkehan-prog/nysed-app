@@ -1,0 +1,525 @@
+# Instincts generated from https://github.com/josephkehan-prog/nysed-app
+# Generated: 2026-06-09T07:19:16.481Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: nysed-app-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, chore
+
+## Evidence
+
+- 7 commits analyzed
+- Detected conventional commit pattern
+- Examples: feat(modules): P2 - ItemRenderer + ModulePlayer + catalog wired to flow, chore: remove Python services + pipeline; drop pytest from CI
+
+---
+id: nysed-app-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Commit Length
+
+## Action
+
+Keep commit messages concise (~48 characters)
+
+## Evidence
+
+- Average commit message length: 48 chars
+- Based on 7 commits
+
+---
+id: nysed-app-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: nysed-app-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: nysed-app-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: nysed-app-arch-feature-based
+trigger: "when adding a new feature"
+confidence: 0.85
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Arch Feature Based
+
+## Action
+
+Create a new folder in src/features/ with all related code colocated
+
+## Evidence
+
+- Feature-based module organization detected
+- Structure: src/features/[feature-name]/
+
+---
+id: nysed-app-test-colocate
+trigger: "when writing tests"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Test Colocate
+
+## Action
+
+Place test file next to the source file (e.g., Button.test.tsx next to Button.tsx)
+
+## Evidence
+
+- Colocated test pattern detected
+- Tests live alongside source files
+
+---
+id: nysed-app-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Test Framework
+
+## Action
+
+Use vitest as the test framework
+
+## Evidence
+
+- Test framework detected: vitest
+- File pattern: *.test.tsx
+
+---
+id: nysed-app-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Test Naming
+
+## Action
+
+Name test files using the pattern: *.test.tsx
+
+## Evidence
+
+- File pattern: *.test.tsx
+- Consistent across test files
+
+---
+id: nysed-app-workflow-feature-development-with-tests-and-ui
+trigger: "when doing feature development with tests and ui"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Workflow Feature Development With Tests And Ui
+
+## Action
+
+Follow the feature-development-with-tests-and-ui workflow:
+1. Implement or update core logic in TypeScript files (e.g., src/modules/*.ts or src/progress/*.ts)
+2. Create or update React UI components (e.g., src/modules/*.tsx, src/components/*.tsx)
+3. Write or update Jest/React Testing Library tests (e.g., *.test.ts, *.test.tsx)
+4. Wire up new components to the main app (e.g., src/App.tsx)
+5. Ensure build passes and tests are green
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: src/modules/ModulePlayer.tsx, src/modules/ModulePlayer.test.tsx, src/modules/ModuleCatalog.tsx
+
+---
+id: nysed-app-workflow-content-ingestion-pipeline
+trigger: "when doing content ingestion pipeline"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Workflow Content Ingestion Pipeline
+
+## Action
+
+Follow the content-ingestion-pipeline workflow:
+1. Write or update an ingestion script (e.g., scripts/ingest-*.ts)
+2. Parse and transform source content into JSON module files (e.g., src/modules/content/math/*.json)
+3. Update or create index files to auto-discover new modules (e.g., src/modules/content/math/index.ts)
+4. Add or update tests for parsing/ingestion logic (e.g., src/content/imParse.test.ts, src/content/imParse.ts)
+5. Run the ingestion script to generate new content files
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: scripts/ingest-im-tasks.ts, src/modules/content/math/*.json, src/modules/content/math/index.ts
+
+---
+id: nysed-app-workflow-ui-enhancement-with-accessibility
+trigger: "when doing ui enhancement with accessibility"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/josephkehan-prog/nysed-app
+---
+
+# Nysed App Workflow Ui Enhancement With Accessibility
+
+## Action
+
+Follow the ui-enhancement-with-accessibility workflow:
+1. Implement or update accessibility context/provider (e.g., src/a11y/AccommodationsContext.tsx)
+2. Add or update accessibility helpers (e.g., src/a11y/speak.ts)
+3. Update UI components to use new accessibility features (e.g., src/components/AccommodationsBar.tsx, src/modules/ItemRenderer.tsx, src/modules/ModulePlayer.tsx)
+4. Write or update tests for accessibility logic and UI (e.g., *.test.tsx)
+5. Wire provider/context into main app (e.g., src/App.tsx)
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: src/a11y/AccommodationsContext.tsx, src/a11y/AccommodationsContext.test.tsx, src/a11y/speak.ts
+
+---
+id: nysed-app-instinct-file-naming
+trigger: "When creating a new file (component, utility, etc.)"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct File Naming
+
+## Action
+
+Name the file using camelCase (e.g., itemRenderer.tsx, masterySummary.test.tsx)
+
+## Evidence
+
+- Pattern in src/modules/ItemRenderer.tsx
+- Pattern in src/progress/mastery.test.ts
+
+---
+id: nysed-app-instinct-function-naming
+trigger: "When defining a function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Function Naming
+
+## Action
+
+Use camelCase for function names (e.g., getMasteryLevel, renderItem)
+
+## Evidence
+
+- Pattern in src/progress/mastery.ts
+- Pattern in src/a11y/speak.ts
+
+---
+id: nysed-app-instinct-class-naming
+trigger: "When defining a class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names (e.g., ModulePlayer, AccommodationsContext)
+
+## Evidence
+
+- Pattern in src/modules/ModulePlayer.tsx
+- Pattern in src/a11y/AccommodationsContext.tsx
+
+---
+id: nysed-app-instinct-constant-naming
+trigger: "When defining a constant"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names (e.g., MAX_ATTEMPTS)
+
+## Evidence
+
+- Pattern in src/progress/mastery.ts
+- Pattern in src/content/imParse.ts
+
+---
+id: nysed-app-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Import Style
+
+## Action
+
+Use relative import paths (e.g., import { X } from '../utils')
+
+## Evidence
+
+- Pattern in src/modules/ModulePlayer.tsx
+- Pattern in src/components/AccommodationsBar.tsx
+
+---
+id: nysed-app-instinct-export-style
+trigger: "When exporting from a file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Export Style
+
+## Action
+
+Use named exports instead of default exports
+
+## Evidence
+
+- Pattern in src/progress/mastery.ts
+- Pattern in src/a11y/speak.ts
+
+---
+id: nysed-app-instinct-test-file-pattern
+trigger: "When adding a test file"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Test File Pattern
+
+## Action
+
+Name the test file with the pattern *.test.tsx and colocate it with the source file
+
+## Evidence
+
+- Pattern in src/modules/ModulePlayer.test.tsx
+- Pattern in src/progress/mastery.test.ts
+
+---
+id: nysed-app-instinct-test-framework
+trigger: "When writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Test Framework
+
+## Action
+
+Use Vitest as the test framework
+
+## Evidence
+
+- Pattern in package.json
+- Pattern in src/progress/mastery.test.ts
+
+---
+id: nysed-app-instinct-test-type
+trigger: "When writing tests for logic or UI components"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Test Type
+
+## Action
+
+Write unit tests for each module or component
+
+## Evidence
+
+- Pattern in src/modules/ModulePlayer.test.tsx
+- Pattern in src/progress/store.test.ts
+
+---
+id: nysed-app-instinct-commit-format
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Commit Format
+
+## Action
+
+Use the Conventional Commits format with a prefix (feat, chore), optional scope, and concise message (average length ~48 chars)
+
+## Evidence
+
+- Seen in commit: feat(modules): P2 - ItemRenderer + ModulePlayer + catalog wired to flow
+- Seen in commit: chore: remove Python services + pipeline; drop pytest from CI
+
+---
+id: nysed-app-instinct-feature-workflow
+trigger: "When implementing a new feature or module with both backend logic and frontend UI, ensuring test coverage"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Feature Workflow
+
+## Action
+
+Follow the workflow: implement core logic, create/update UI components, write/update tests, wire components to main app, ensure build and tests pass
+
+## Evidence
+
+- Workflow: feature-development-with-tests-and-ui
+- Pattern in commit sequences and files: src/modules/ModulePlayer.tsx, src/modules/ModulePlayer.test.tsx, src/App.tsx
+
+---
+id: nysed-app-instinct-content-ingestion
+trigger: "When ingesting a batch of new content modules (e.g., math modules)"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct Content Ingestion
+
+## Action
+
+Follow the workflow: write/update ingestion script, parse/transform content into JSON, update/create index files, add/update tests for ingestion logic, run the script to generate content files
+
+## Evidence
+
+- Workflow: content-ingestion-pipeline
+- Pattern in files: scripts/ingest-im-tasks.ts, src/modules/content/math/*.json
+
+---
+id: nysed-app-instinct-a11y-enhancement
+trigger: "When enhancing accessibility (a11y) features in the app"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: josephkehan-prog/nysed-app
+---
+
+# Nysed App Instinct A11y Enhancement
+
+## Action
+
+Follow the workflow: implement/update a11y context/provider, add/update a11y helpers, update UI components to use a11y features, write/update tests, wire provider/context into main app
+
+## Evidence
+
+- Workflow: ui-enhancement-with-accessibility
+- Pattern in files: src/a11y/AccommodationsContext.tsx, src/components/AccommodationsBar.tsx, src/App.tsx
+
