@@ -11,13 +11,14 @@ export interface SectionVisibility {
   scratchPaper: boolean;
 }
 
-// RED stub — replaced once the reproducer tests are confirmed failing.
-export function visibleSections(_subject: Subject): SectionVisibility {
+export function visibleSections(subject: Subject): SectionVisibility {
+  const isMath = subject === 'math';
   return {
-    graphing: false,
-    equationEntry: false,
-    calculator: false,
-    writingSpace: false,
-    scratchPaper: false,
+    graphing: isMath,
+    equationEntry: isMath,
+    calculator: isMath,
+    // Writing and scratch paper apply to both math and ELA.
+    writingSpace: true,
+    scratchPaper: true,
   };
 }

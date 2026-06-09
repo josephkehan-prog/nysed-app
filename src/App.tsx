@@ -7,6 +7,7 @@ import { LoginPortal } from './auth/LoginPortal';
 import { DomainSelect } from './auth/DomainSelect';
 import { portalReducer, initialPortalState } from './auth/flow';
 import { DOMAIN_LABELS } from './auth/roster';
+import { visibleSections } from './nextera/sections';
 import type { Subject } from './nextera/tools';
 
 // Heavy tool libraries (Excalidraw, Mafs, Tiptap, MathLive) are code-split so the
@@ -32,6 +33,7 @@ interface TestShellProps {
 /** The Nextera-style practice shell, entered only after sign-in and domain
  * selection. Tool availability follows the chosen grade/subject. */
 function TestShell({ studentName, grade, subject, onSignOut }: TestShellProps) {
+  const sections = visibleSections(subject);
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16 }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -48,43 +50,57 @@ function TestShell({ studentName, grade, subject, onSignOut }: TestShellProps) {
 
       <section>
         <h2>Question</h2>
-        <p>
-          What is <MathText tex="\frac{1}{2} + \frac{1}{4}" />?
-        </p>
+        {subject === 'math' ? (
+          <p>
+            What is <MathText tex="\frac{1}{2} + \frac{1}{4}" />?
+          </p>
+        ) : (
+          <p>Read the passage, then explain how the author develops the central idea.</p>
+        )}
       </section>
 
-      <section>
-        <h2>Graphing</h2>
-        <Suspense fallback={<Loading />}>
-          <GraphPlot />
-        </Suspense>
-      </section>
+      {sections.graphing ? (
+        <section>
+          <h2>Graphing</h2>
+          <Suspense fallback={<Loading />}>
+            <GraphPlot />
+          </Suspense>
+        </section>
+      ) : null}
 
-      <section>
-        <h2>Equation entry</h2>
-        <Suspense fallback={<Loading />}>
-          <MathField />
-        </Suspense>
-      </section>
+      {sections.equationEntry ? (
+        <section>
+          <h2>Equation entry</h2>
+          <Suspense fallback={<Loading />}>
+            <MathField />
+          </Suspense>
+        </section>
+      ) : null}
 
-      <section>
-        <h2>Writing space</h2>
-        <Suspense fallback={<Loading />}>
-          <WritingSpace />
-        </Suspense>
-      </section>
+      {sections.writingSpace ? (
+        <section>
+          <h2>Writing space</h2>
+          <Suspense fallback={<Loading />}>
+            <WritingSpace />
+          </Suspense>
+        </section>
+      ) : null}
 
-      <section>
-        <h2>Scratch paper</h2>
-        <Suspense fallback={<Loading />}>
-          <ScratchPad />
-        </Suspense>
-      </section>
+      {sections.scratchPaper ? (
+        <section>
+          <h2>Scratch paper</h2>
+          <Suspense fallback={<Loading />}>
+            <ScratchPad />
+          </Suspense>
+        </section>
+      ) : null}
 
-      <section>
-        <h2>Calculator</h2>
-        <Calculator />
-      </section>
+      {sections.calculator ? (
+        <section>
+          <h2>Calculator</h2>
+          <Calculator />
+        </section>
+      ) : null}
     </main>
   );
 }
