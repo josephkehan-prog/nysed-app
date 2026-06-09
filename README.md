@@ -10,7 +10,10 @@ to take the real test — per-grade/per-session tool gating, an expansive tool s
 
 ## Status
 
-- ✅ **157 [Vitest](https://vitest.dev) tests passing** — fully client-side; no backend, no Python
+- ✅ **168 [Vitest](https://vitest.dev) tests passing** — fully client-side; no backend, no Python
+- ✅ **Math + ELA** learning modules — numeric, math-equivalence, choice/multi-select, ordering,
+  number-line, and text items; multi-item modules; ELA reading passages
+- ✅ **Practice & adaptive review** sessions + per-standard mastery, persisted in localStorage
 - ✅ Installable **PWA** — `npm run build` emits `dist/` with `sw.js` + `manifest.webmanifest`
 
 ## Architecture
@@ -25,7 +28,8 @@ to take the real test — per-grade/per-session tool gating, an expansive tool s
 | Storage / sessions | `src/server` | `node:sqlite` store, mastery-by-standard, practice-session builder |
 | UI components | `src/components` | KaTeX, Mafs, MathLive, Excalidraw, Tiptap (lazy-loaded) |
 | Math equivalence | `src/modules/score.ts` | Compute Engine `isEqual` — browser-side, no backend (½ ≡ 0.5, 2x+3 ≡ 3+2x) |
-| Learning modules | `src/modules`, `src/progress` | module contract + player/catalog; localStorage progress & mastery |
+| Learning modules | `src/modules`, `src/progress` | module contract, 7 interaction types, multi-item worksheets, player/catalog, practice + adaptive-review sessions; localStorage progress & mastery |
+| Content (Math + ELA) | `src/modules/content` | math practice/explore modules + original CC-BY ELA reading passages (auto-discovered JSON) |
 | Content pipeline | `scripts/ingest-im-tasks.ts` | Illustrative Math PDFs → module JSON (TypeScript, build-time) |
 
 ## Tech stack
@@ -41,7 +45,7 @@ Node 23.4+).
 
 ```bash
 npm ci          # use `npm ci`, NOT `npm install` — see note below
-npm test        # 157 Vitest tests
+npm test        # 168 Vitest tests
 npm run dev     # local dev server
 npm run build   # production PWA build (dist/)
 ```
