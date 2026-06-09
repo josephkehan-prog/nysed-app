@@ -3,6 +3,8 @@ import type { LearningModule, ResponsePayload } from './types';
 import type { Score } from '../scoring/types';
 import { scoreResponse } from './score';
 import { ItemRenderer } from './ItemRenderer';
+import { useAccommodationsState } from '../a11y/AccommodationsContext';
+import { speak } from '../a11y/speak';
 
 export interface ModulePlayerProps {
   module: LearningModule;
@@ -17,6 +19,7 @@ export interface ModulePlayerProps {
  * reveal the worked solution for 'explore' items (or after a practice attempt). */
 export function ModulePlayer({ module, onExit, onScored, onVisited }: ModulePlayerProps) {
   const item = module.items[0];
+  const { textToSpeech } = useAccommodationsState();
   const [response, setResponse] = useState<ResponsePayload | null>(null);
   const [checked, setChecked] = useState(false);
   const [revealed, setRevealed] = useState(false);
@@ -35,6 +38,11 @@ export function ModulePlayer({ module, onExit, onScored, onVisited }: ModulePlay
 
       <section>
         <p style={{ whiteSpace: 'pre-wrap' }}>{item.stem}</p>
+        {textToSpeech ? (
+          <button type="button" onClick={() => speak(item.stem)}>
+            🔊 Read aloud
+          </button>
+        ) : null}
         <ItemRenderer
           item={item}
           value={response}

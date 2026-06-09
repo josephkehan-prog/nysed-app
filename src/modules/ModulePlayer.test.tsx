@@ -2,6 +2,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { ModulePlayer } from './ModulePlayer';
+import { AccommodationsProvider } from '../a11y/AccommodationsContext';
 import type { LearningModule } from './types';
 
 afterEach(cleanup);
@@ -75,5 +76,28 @@ describe('ModulePlayer', () => {
     render(<ModulePlayer module={exploreMod} onExit={() => {}} onVisited={onVisited} />);
     fireEvent.click(screen.getByRole('button', { name: /show worked solution/i }));
     expect(onVisited).toHaveBeenCalled();
+  });
+
+  it('reads the stem aloud when text-to-speech is enabled', () => {
+    const speak = vi.fn();
+    const w = window as unknown as {
+      speechSynthesis: { speak: typeof speak; cancel: () => void };
+      SpeechSynthesisUtterance: unknown;
+    };
+    w.speechSynthesis = { speak, cancel: vi.fn() };
+    w.SpeechSynthesisUtterance = class {
+      text: string;
+      constructor(t: string) {
+        this.text = t;
+      }
+    };
+    render(
+      <AccommodationsProvider initial={{ textToSpeech: true }}>
+        <ModulePlayer module={exploreMod} onExit={() => {}} />
+      </AccommodationsProvider>,
+    );
+    fireEvent.click(screen.getByRole('button', { name: /read aloud/i }));
+    expect(speak).toHaveBeenCalledTimes(1);
+    expect((speak.mock.calls[0][0] as { text: string }).text).toBe('How much paint?');
   });
 });

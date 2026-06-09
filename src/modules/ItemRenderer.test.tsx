@@ -2,6 +2,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { ItemRenderer } from './ItemRenderer';
+import { AccommodationsProvider } from '../a11y/AccommodationsContext';
 import type { PracticeItem } from './types';
 
 afterEach(cleanup);
@@ -40,5 +41,20 @@ describe('ItemRenderer', () => {
     render(<ItemRenderer item={item} value={null} onChange={onChange} />);
     fireEvent.click(screen.getByRole('radio', { name: 'B' }));
     expect(onChange).toHaveBeenCalledWith({ type: 'choice', selected: ['b'] });
+  });
+
+  it('choice: masks options until revealed when answer masking is on', () => {
+    const item = base({
+      interactionType: 'choice',
+      config: { choices: [{ id: 'a', label: 'A' }, { id: 'b', label: 'B' }] },
+    });
+    render(
+      <AccommodationsProvider initial={{ answerMasking: true }}>
+        <ItemRenderer item={item} value={null} onChange={() => {}} />
+      </AccommodationsProvider>,
+    );
+    expect(screen.queryByText('A')).not.toBeInTheDocument();
+    fireEvent.click(screen.getAllByRole('button', { name: /reveal/i })[0]);
+    expect(screen.getByText('A')).toBeInTheDocument();
   });
 });

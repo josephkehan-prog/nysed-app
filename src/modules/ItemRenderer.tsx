@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import type { PracticeItem, ResponsePayload } from './types';
+import { useAccommodationsState } from '../a11y/AccommodationsContext';
 
 export interface ItemRendererProps {
   item: PracticeItem;
@@ -8,8 +10,12 @@ export interface ItemRendererProps {
 }
 
 /** Renders the input for one item, dispatching on interactionType. Controlled:
- * emits a ResponsePayload on every edit; never sees the answer key. */
+ * emits a ResponsePayload on every edit; never sees the answer key. Honors the
+ * answer-masking accommodation by covering choice options until revealed. */
 export function ItemRenderer({ item, value, onChange, disabled }: ItemRendererProps) {
+  const { answerMasking } = useAccommodationsState();
+  const [revealed, setRevealed] = useState<Set<string>>(() => new Set());
+
   switch (item.interactionType) {
     case 'numeric': {
       const v = value?.type === 'numeric' ? value.value : null;
@@ -31,27 +37,42 @@ export function ItemRenderer({ item, value, onChange, disabled }: ItemRendererPr
     case 'choice': {
       const selected = value?.type === 'choice' ? value.selected : [];
       const multiple = item.config?.multiple ?? false;
+      const toggleRevealed = (id: string) =>
+        setRevealed((r) => {
+          const next = new Set(r);
+          if (next.has(id)) next.delete(id);
+          else next.add(id);
+          return next;
+        });
       return (
         <fieldset style={{ border: 0, padding: 0 }}>
-          {(item.config?.choices ?? []).map((c) => (
-            <label key={c.id} style={{ display: 'block' }}>
-              <input
-                type={multiple ? 'checkbox' : 'radio'}
-                name={`choice-${item.stem.slice(0, 8)}`}
-                disabled={disabled}
-                checked={selected.includes(c.id)}
-                onChange={() => {
-                  const next = multiple
-                    ? selected.includes(c.id)
-                      ? selected.filter((x) => x !== c.id)
-                      : [...selected, c.id]
-                    : [c.id];
-                  onChange({ type: 'choice', selected: next });
-                }}
-              />{' '}
-              {c.label}
-            </label>
-          ))}
+          {(item.config?.choices ?? []).map((c) => {
+            const shown = !answerMasking || revealed.has(c.id);
+            return (
+              <label key={c.id} style={{ display: 'block' }}>
+                <input
+                  type={multiple ? 'checkbox' : 'radio'}
+                  name={`choice-${item.stem.slice(0, 8)}`}
+                  disabled={disabled || !shown}
+                  checked={selected.includes(c.id)}
+                  onChange={() => {
+                    const next = multiple
+                      ? selected.includes(c.id)
+                        ? selected.filter((x) => x !== c.id)
+                        : [...selected, c.id]
+                      : [c.id];
+                    onChange({ type: 'choice', selected: next });
+                  }}
+                />{' '}
+                {shown ? c.label : <span aria-hidden>▭▭▭▭</span>}
+                {answerMasking ? (
+                  <button type="button" style={{ marginLeft: 8 }} onClick={() => toggleRevealed(c.id)}>
+                    {shown ? 'Mask' : 'Reveal'}
+                  </button>
+                ) : null}
+              </label>
+            );
+          })}
         </fieldset>
       );
     }

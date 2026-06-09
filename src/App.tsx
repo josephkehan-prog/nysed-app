@@ -6,6 +6,8 @@ import { DOMAIN_LABELS, type Student } from './auth/roster';
 import { ModuleCatalog } from './modules/ModuleCatalog';
 import { ModulePlayer } from './modules/ModulePlayer';
 import { MasterySummary } from './modules/MasterySummary';
+import { AccommodationsBar } from './components/AccommodationsBar';
+import { AccommodationsProvider, useAccommodations } from './a11y/AccommodationsContext';
 import { createLocalProgressStore } from './progress/store';
 import type { LearningModule } from './modules/types';
 import type { Subject } from './nextera/tools';
@@ -17,8 +19,18 @@ interface DomainHomeProps {
 }
 
 /** A domain's home: browse the module catalog (with per-cluster progress), play a
- * chosen module, and persist attempts/visits to the local ProgressStore. */
-function DomainHome({ domain, student, onSignOut }: DomainHomeProps) {
+ * chosen module, and persist attempts/visits to the local ProgressStore. The
+ * AccommodationsProvider scopes accommodations to this signed-in session. */
+function DomainHome(props: DomainHomeProps) {
+  return (
+    <AccommodationsProvider>
+      <DomainHomeBody {...props} />
+    </AccommodationsProvider>
+  );
+}
+
+function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
+  const { state: accommodations } = useAccommodations();
   const store = useMemo(() => createLocalProgressStore(), []);
   const studentId = student.username;
   const [selected, setSelected] = useState<LearningModule | null>(null);
@@ -31,8 +43,14 @@ function DomainHome({ domain, student, onSignOut }: DomainHomeProps) {
   );
   const mastery = useMemo(() => store.masteryByStandard(studentId), [store, studentId, version]);
 
+  const contrast = accommodations.reverseContrast
+    ? { background: '#000', color: '#fff' }
+    : undefined;
+
   return (
-    <main style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16 }}>
+    <main
+      style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16, ...contrast }}
+    >
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
         <h1>{DOMAIN_LABELS[domain]}</h1>
         <span>
@@ -42,6 +60,7 @@ function DomainHome({ domain, student, onSignOut }: DomainHomeProps) {
           </button>
         </span>
       </header>
+      <AccommodationsBar />
       {selected ? (
         <ModulePlayer
           module={selected}
