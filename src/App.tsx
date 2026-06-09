@@ -7,7 +7,7 @@ import { ModuleCatalog } from './modules/ModuleCatalog';
 import { ModulePlayer } from './modules/ModulePlayer';
 import { MasterySummary } from './modules/MasterySummary';
 import { PracticeSession } from './modules/PracticeSession';
-import { buildPracticeSession } from './modules/session';
+import { buildPracticeSession, buildReviewSession } from './modules/session';
 import { loadModules } from './modules/registry';
 import { AccommodationsBar } from './components/AccommodationsBar';
 import { AccommodationsProvider, useAccommodations } from './a11y/AccommodationsContext';
@@ -58,7 +58,9 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
     };
   }, [domain]);
   const practice = useMemo(() => buildPracticeSession(modules), [modules]);
-  const [inSession, setInSession] = useState(false);
+  const review = useMemo(() => buildReviewSession(modules, mastery), [modules, mastery]);
+  // The active session's modules (practice or review), or null when browsing.
+  const [session, setSession] = useState<LearningModule[] | null>(null);
 
   const recordAttempt = (moduleId: string, standard: string, score: { score: number; maxScore: number }) =>
     store.recordAttempt({ studentId, moduleId, standard, score: score.score, maxScore: score.maxScore });
@@ -81,12 +83,12 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
         </span>
       </header>
       <AccommodationsBar />
-      {inSession ? (
+      {session ? (
         <PracticeSession
-          modules={practice}
+          modules={session}
           onRecord={recordAttempt}
           onExit={() => {
-            setInSession(false);
+            setSession(null);
             setVersion((v) => v + 1);
           }}
         />
@@ -106,9 +108,12 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
       ) : (
         <>
           <MasterySummary mastery={mastery} />
-          <p>
-            <button type="button" disabled={practice.length === 0} onClick={() => setInSession(true)}>
+          <p style={{ display: 'flex', gap: 8 }}>
+            <button type="button" disabled={practice.length === 0} onClick={() => setSession(practice)}>
               {practice.length > 0 ? `Start practice (${practice.length})` : 'Start practice'}
+            </button>
+            <button type="button" disabled={review.length === 0} onClick={() => setSession(review)}>
+              Review weak spots
             </button>
           </p>
           <ModuleCatalog domain={domain} onOpen={setSelected} engagedIds={engagedIds} />
