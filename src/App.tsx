@@ -1,4 +1,4 @@
-import { useMemo, useReducer, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import { LoginPortal } from './auth/LoginPortal';
 import { DomainSelect } from './auth/DomainSelect';
 import { portalReducer, initialPortalState } from './auth/flow';
@@ -6,6 +6,9 @@ import { DOMAIN_LABELS, type Student } from './auth/roster';
 import { ModuleCatalog } from './modules/ModuleCatalog';
 import { ModulePlayer } from './modules/ModulePlayer';
 import { MasterySummary } from './modules/MasterySummary';
+import { PracticeSession } from './modules/PracticeSession';
+import { buildPracticeSession } from './modules/session';
+import { loadModules } from './modules/registry';
 import { AccommodationsBar } from './components/AccommodationsBar';
 import { AccommodationsProvider, useAccommodations } from './a11y/AccommodationsContext';
 import { createLocalProgressStore } from './progress/store';
@@ -43,6 +46,23 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
   );
   const mastery = useMemo(() => store.masteryByStandard(studentId), [store, studentId, version]);
 
+  // Modules for this domain, loaded once, used to build a practice session.
+  const [modules, setModules] = useState<LearningModule[]>([]);
+  useEffect(() => {
+    let live = true;
+    loadModules(domain).then((m) => {
+      if (live) setModules(m);
+    });
+    return () => {
+      live = false;
+    };
+  }, [domain]);
+  const practice = useMemo(() => buildPracticeSession(modules), [modules]);
+  const [inSession, setInSession] = useState(false);
+
+  const recordAttempt = (moduleId: string, standard: string, score: { score: number; maxScore: number }) =>
+    store.recordAttempt({ studentId, moduleId, standard, score: score.score, maxScore: score.maxScore });
+
   const contrast = accommodations.reverseContrast
     ? { background: '#000', color: '#fff' }
     : undefined;
@@ -61,18 +81,21 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
         </span>
       </header>
       <AccommodationsBar />
-      {selected ? (
+      {inSession ? (
+        <PracticeSession
+          modules={practice}
+          onRecord={recordAttempt}
+          onExit={() => {
+            setInSession(false);
+            setVersion((v) => v + 1);
+          }}
+        />
+      ) : selected ? (
         <ModulePlayer
           module={selected}
           onExit={() => setSelected(null)}
           onScored={(s) => {
-            store.recordAttempt({
-              studentId,
-              moduleId: selected.meta.id,
-              standard: selected.meta.standards[0] ?? selected.meta.cluster,
-              score: s.score,
-              maxScore: s.maxScore,
-            });
+            recordAttempt(selected.meta.id, selected.meta.standards[0] ?? selected.meta.cluster, s);
             setVersion((v) => v + 1);
           }}
           onVisited={() => {
@@ -83,6 +106,11 @@ function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
       ) : (
         <>
           <MasterySummary mastery={mastery} />
+          <p>
+            <button type="button" disabled={practice.length === 0} onClick={() => setInSession(true)}>
+              {practice.length > 0 ? `Start practice (${practice.length})` : 'Start practice'}
+            </button>
+          </p>
           <ModuleCatalog domain={domain} onOpen={setSelected} engagedIds={engagedIds} />
         </>
       )}
