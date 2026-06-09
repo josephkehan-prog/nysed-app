@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "id": "practice-mean-of-values",
+    "domain": "math",
+    "cluster": "6.SP",
+    "standards": ["6.SP.B.5"],
+    "title": "Finding the Mean",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Find the mean (average) of the data set: 4, 8, 6, 10, 2.",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 6 },
+      "workedSolution": "Sum the values: 4 + 8 + 6 + 10 + 2 = 30. Divide by how many there are: 30 ÷ 5 = 6."
+    }
+  ]
+}

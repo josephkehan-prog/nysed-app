@@ -10,7 +10,7 @@ to take the real test — per-grade/per-session tool gating, an expansive tool s
 
 ## Status
 
-- ✅ **142 [Vitest](https://vitest.dev) tests passing** — fully client-side; no backend, no Python
+- ✅ **152 [Vitest](https://vitest.dev) tests passing** — fully client-side; no backend, no Python
 - ✅ Installable **PWA** — `npm run build` emits `dist/` with `sw.js` + `manifest.webmanifest`
 
 ## Architecture
@@ -41,7 +41,7 @@ Node 23.4+).
 
 ```bash
 npm ci          # use `npm ci`, NOT `npm install` — see note below
-npm test        # 142 Vitest tests
+npm test        # 152 Vitest tests
 npm run dev     # local dev server
 npm run build   # production PWA build (dist/)
 ```

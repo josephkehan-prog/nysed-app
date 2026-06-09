@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "id": "practice-triangle-area",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": ["6.G.A.1"],
+    "title": "Area of a Triangle",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "A triangle has a base of 10 cm and a height of 6 cm. What is its area, in square centimeters?",
+      "interactionType": "numeric",
+      "config": { "unit": "cm²" },
+      "answer": { "type": "numeric", "value": 30 },
+      "workedSolution": "Area = ½ × base × height = ½ × 10 × 6 = 30 square centimeters."
+    }
+  ]
+}
