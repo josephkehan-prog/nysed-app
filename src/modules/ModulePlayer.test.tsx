@@ -61,4 +61,19 @@ describe('ModulePlayer', () => {
     fireEvent.click(screen.getByRole('button', { name: /back/i }));
     expect(onExit).toHaveBeenCalled();
   });
+
+  it('practice: reports the score via onScored when checked', () => {
+    const onScored = vi.fn();
+    render(<ModulePlayer module={practiceMod} onExit={() => {}} onScored={onScored} />);
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '40' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Check' }));
+    expect(onScored).toHaveBeenCalledWith({ score: 1, maxScore: 1 });
+  });
+
+  it('explore: reports a visit via onVisited when the worked solution is revealed', () => {
+    const onVisited = vi.fn();
+    render(<ModulePlayer module={exploreMod} onExit={() => {}} onVisited={onVisited} />);
+    fireEvent.click(screen.getByRole('button', { name: /show worked solution/i }));
+    expect(onVisited).toHaveBeenCalled();
+  });
 });

@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import type { LearningModule, ResponsePayload } from './types';
+import type { Score } from '../scoring/types';
 import { scoreResponse } from './score';
 import { ItemRenderer } from './ItemRenderer';
 
 export interface ModulePlayerProps {
   module: LearningModule;
   onExit: () => void;
+  /** Fired when a 'practice' item is checked, with its score (for progress). */
+  onScored?: (score: Score) => void;
+  /** Fired when an 'explore' worked solution is revealed (counts as engagement). */
+  onVisited?: () => void;
 }
 
 /** Plays a single-item module: render stem + input, auto-score 'practice' items,
  * reveal the worked solution for 'explore' items (or after a practice attempt). */
-export function ModulePlayer({ module, onExit }: ModulePlayerProps) {
+export function ModulePlayer({ module, onExit, onScored, onVisited }: ModulePlayerProps) {
   const item = module.items[0];
   const [response, setResponse] = useState<ResponsePayload | null>(null);
   const [checked, setChecked] = useState(false);
@@ -41,7 +46,17 @@ export function ModulePlayer({ module, onExit }: ModulePlayerProps) {
 
         {item.answer ? (
           <p>
-            <button type="button" disabled={!response} onClick={() => setChecked(true)}>
+            <button
+              type="button"
+              disabled={!response}
+              onClick={() => {
+                setChecked(true);
+                if (response) {
+                  const s = scoreResponse(item, response);
+                  if (s) onScored?.(s);
+                }
+              }}
+            >
               Check
             </button>{' '}
             {result ? (
@@ -52,7 +67,13 @@ export function ModulePlayer({ module, onExit }: ModulePlayerProps) {
 
         {item.workedSolution ? (
           <p>
-            <button type="button" onClick={() => setRevealed(true)}>
+            <button
+              type="button"
+              onClick={() => {
+                setRevealed(true);
+                onVisited?.();
+              }}
+            >
               Show worked solution
             </button>
             {revealed ? (

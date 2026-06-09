@@ -5,10 +5,12 @@ import { loadModules, byCluster } from './registry';
 export interface ModuleCatalogProps {
   domain: Domain;
   onOpen: (module: LearningModule) => void;
+  /** Ids of modules the student has worked on; drives the progress markers. */
+  engagedIds?: Set<string>;
 }
 
 /** Lists a domain's modules grouped by cluster (the Coherence-Map layout). */
-export function ModuleCatalog({ domain, onOpen }: ModuleCatalogProps) {
+export function ModuleCatalog({ domain, onOpen, engagedIds }: ModuleCatalogProps) {
   const [modules, setModules] = useState<LearningModule[] | null>(null);
 
   useEffect(() => {
@@ -29,21 +31,41 @@ export function ModuleCatalog({ domain, onOpen }: ModuleCatalogProps) {
     <div>
       {Object.keys(grouped)
         .sort()
-        .map((cluster) => (
-          <section key={cluster}>
-            <h2>{cluster}</h2>
-            <ul>
-              {grouped[cluster].map((m) => (
-                <li key={m.meta.id}>
-                  <button type="button" onClick={() => onOpen(m)}>
-                    {m.meta.title}
-                  </button>{' '}
-                  <small>{m.meta.standards.join(', ')}</small>
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))}
+        .map((cluster) => {
+          const inCluster = grouped[cluster];
+          const done = engagedIds ? inCluster.filter((m) => engagedIds.has(m.meta.id)).length : 0;
+          return (
+            <section key={cluster}>
+              <h2>{cluster}</h2>
+              {engagedIds ? (
+                <p style={{ margin: '0 0 6px' }}>
+                  <small>
+                    {done} of {inCluster.length} worked on
+                  </small>
+                </p>
+              ) : null}
+              <ul>
+                {inCluster.map((m) => {
+                  const engaged = engagedIds?.has(m.meta.id) ?? false;
+                  return (
+                    <li key={m.meta.id}>
+                      <button type="button" onClick={() => onOpen(m)}>
+                        {m.meta.title}
+                      </button>{' '}
+                      <small>{m.meta.standards.join(', ')}</small>
+                      {engaged ? (
+                        <span aria-label="worked on" title="Worked on" style={{ color: '#2e9e6b' }}>
+                          {' '}
+                          ✓
+                        </span>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        })}
     </div>
   );
 }

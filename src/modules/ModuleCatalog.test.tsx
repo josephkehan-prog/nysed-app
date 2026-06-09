@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, within } from '@testing-library/react';
 import { ModuleCatalog } from './ModuleCatalog';
 
 afterEach(cleanup);
@@ -16,5 +16,14 @@ describe('ModuleCatalog', () => {
   it('shows an empty state for a domain with no modules', async () => {
     render(<ModuleCatalog domain="ela" onOpen={() => {}} />);
     expect(await screen.findByText(/no modules yet/i)).toBeInTheDocument();
+  });
+
+  it('marks modules the student has already worked on', async () => {
+    render(
+      <ModuleCatalog domain="math" onOpen={() => {}} engagedIds={new Set(['sample-unit-rate'])} />,
+    );
+    const btn = await screen.findByRole('button', { name: /unit rate/i });
+    const li = btn.closest('li') as HTMLElement;
+    expect(within(li).getByLabelText(/worked on/i)).toBeInTheDocument();
   });
 });
