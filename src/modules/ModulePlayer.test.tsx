@@ -33,6 +33,22 @@ const practiceMod: LearningModule = {
   items: [{ stem: '120 miles in 3 hours?', interactionType: 'numeric', answer: { type: 'numeric', value: 40 } }],
 };
 
+const multiMod: LearningModule = {
+  meta: {
+    id: 'multi',
+    domain: 'math',
+    cluster: '6.RP',
+    standards: ['6.RP.A.1'],
+    title: 'Two-parter',
+    kind: 'practice',
+    source: { name: 'S', license: 'CC BY 4.0', attribution: 'S' },
+  },
+  items: [
+    { stem: '2 + 2?', interactionType: 'numeric', answer: { type: 'numeric', value: 4 } },
+    { stem: '3 + 3?', interactionType: 'numeric', answer: { type: 'numeric', value: 6 } },
+  ],
+};
+
 describe('ModulePlayer', () => {
   it('explore: reveals the worked solution on demand', () => {
     render(<ModulePlayer module={exploreMod} onExit={() => {}} />);
@@ -54,6 +70,18 @@ describe('ModulePlayer', () => {
     fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '41' } });
     fireEvent.click(screen.getByRole('button', { name: 'Check' }));
     expect(screen.getByRole('status')).toHaveTextContent(/not quite/i);
+  });
+
+  it('multi-item: renders every item and aggregates the score', () => {
+    render(<ModulePlayer module={multiMod} onExit={() => {}} />);
+    const inputs = screen.getAllByRole('spinbutton');
+    expect(inputs).toHaveLength(2);
+    const checks = screen.getAllByRole('button', { name: 'Check' });
+    fireEvent.change(inputs[0], { target: { value: '4' } }); // correct
+    fireEvent.click(checks[0]);
+    fireEvent.change(inputs[1], { target: { value: '0' } }); // wrong
+    fireEvent.click(checks[1]);
+    expect(screen.getByText(/1 of 2 correct/i)).toBeInTheDocument();
   });
 
   it('calls onExit from the Back button', () => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { LearningModule, ResponsePayload } from './types';
+import type { LearningModule, PracticeItem, ResponsePayload } from './types';
 import type { Score } from '../scoring/types';
 import { scoreResponse } from './score';
 import { ItemRenderer } from './ItemRenderer';
@@ -12,23 +12,31 @@ export interface PracticeSessionProps {
   onExit: () => void;
 }
 
+interface Step {
+  module: LearningModule;
+  item: PracticeItem;
+}
+
 interface Result {
-  id: string;
   title: string;
   correct: boolean;
 }
 
 const isFullCredit = (s: Score) => s.maxScore > 0 && s.score >= s.maxScore;
 
-/** Plays a sequence of single-item practice modules: answer → submit (scored) →
- * next, then an end-of-session summary. Each module's first item is scored. */
+/** Plays a flat sequence of auto-scorable items (multi-item modules expand into their
+ * individual questions): answer → submit (scored) → next, then a scored summary. */
 export function PracticeSession({ modules, onRecord, onExit }: PracticeSessionProps) {
+  const steps: Step[] = modules.flatMap((m) =>
+    m.items.filter((i) => i.answer).map((item) => ({ module: m, item })),
+  );
+
   const [index, setIndex] = useState(0);
   const [response, setResponse] = useState<ResponsePayload | null>(null);
   const [submitted, setSubmitted] = useState<Score | null>(null);
   const [results, setResults] = useState<Result[]>([]);
 
-  if (modules.length === 0) {
+  if (steps.length === 0) {
     return (
       <div>
         <p>No practice questions available yet.</p>
@@ -39,15 +47,15 @@ export function PracticeSession({ modules, onRecord, onExit }: PracticeSessionPr
     );
   }
 
-  if (index >= modules.length) {
+  if (index >= steps.length) {
     const correct = results.filter((r) => r.correct).length;
     return (
       <section aria-label="Practice results">
         <h2>Practice complete</h2>
-        <p role="status">{`You scored ${correct} of ${modules.length}.`}</p>
+        <p role="status">{`You scored ${correct} of ${steps.length}.`}</p>
         <ul>
-          {results.map((r) => (
-            <li key={r.id}>
+          {results.map((r, i) => (
+            <li key={i}>
               {r.correct ? '✓' : '✗'} {r.title}
             </li>
           ))}
@@ -59,16 +67,15 @@ export function PracticeSession({ modules, onRecord, onExit }: PracticeSessionPr
     );
   }
 
-  const current = modules[index];
-  const item = current.items[0];
-  const last = index + 1 >= modules.length;
+  const { module: mod, item } = steps[index];
+  const last = index + 1 >= steps.length;
 
   const submit = () => {
     if (!response) return;
     const score = scoreResponse(item, response) ?? { score: 0, maxScore: 1 };
     setSubmitted(score);
-    setResults((r) => [...r, { id: current.meta.id, title: current.meta.title, correct: isFullCredit(score) }]);
-    onRecord?.(current.meta.id, current.meta.standards[0] ?? current.meta.cluster, score);
+    setResults((r) => [...r, { title: mod.meta.title, correct: isFullCredit(score) }]);
+    onRecord?.(mod.meta.id, mod.meta.standards[0] ?? mod.meta.cluster, score);
   };
 
   const next = () => {
@@ -80,16 +87,11 @@ export function PracticeSession({ modules, onRecord, onExit }: PracticeSessionPr
   return (
     <section aria-label="Practice session">
       <p>
-        <small>{`Question ${index + 1} of ${modules.length}`}</small>
+        <small>{`Question ${index + 1} of ${steps.length}`}</small>
       </p>
-      <h2>{current.meta.title}</h2>
+      <h2>{mod.meta.title}</h2>
       <p style={{ whiteSpace: 'pre-wrap' }}>{item.stem}</p>
-      <ItemRenderer
-        item={item}
-        value={response}
-        onChange={setResponse}
-        disabled={submitted !== null}
-      />
+      <ItemRenderer item={item} value={response} onChange={setResponse} disabled={submitted !== null} />
       {submitted ? (
         <p>
           <span role="status">{isFullCredit(submitted) ? '✓ Correct' : '✗ Not quite'}</span>{' '}

@@ -43,6 +43,30 @@ describe('PracticeSession', () => {
     expect(onRecord).toHaveBeenCalledTimes(2);
   });
 
+  it('flattens a multi-item module into individual questions', () => {
+    const twoItem: LearningModule = {
+      meta: {
+        id: 'two',
+        domain: 'math',
+        cluster: '6.RP',
+        standards: ['6.RP.A.1'],
+        title: 'Two-parter',
+        kind: 'practice',
+        source: { name: 's', license: 'l', attribution: 'a' },
+      },
+      items: [
+        { stem: 'q1', interactionType: 'numeric', answer: { type: 'numeric', value: 4 } },
+        { stem: 'q2', interactionType: 'numeric', answer: { type: 'numeric', value: 6 } },
+      ],
+    };
+    render(<PracticeSession modules={[twoItem]} onExit={() => {}} />);
+    expect(screen.getByText('Question 1 of 2')).toBeInTheDocument();
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '4' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+    expect(screen.getByText('Question 2 of 2')).toBeInTheDocument();
+  });
+
   it('exits via the Exit button', () => {
     const onExit = vi.fn();
     render(<PracticeSession modules={[numMod('a', 1)]} onExit={onExit} />);
