@@ -90,6 +90,27 @@ export function ItemRenderer({ item, value, onChange, disabled }: ItemRendererPr
         </label>
       );
     }
+    case 'numberline': {
+      const v = value?.type === 'numberline' ? value.value : null;
+      const min = item.config?.min ?? 0;
+      const max = item.config?.max ?? 10;
+      const step = item.config?.step ?? 1;
+      return (
+        <label>
+          Place on the number line:{' '}
+          <input
+            type="range"
+            min={min}
+            max={max}
+            step={step}
+            disabled={disabled}
+            value={v ?? min}
+            onChange={(e) => onChange({ type: 'numberline', value: Number(e.target.value) })}
+          />{' '}
+          <output>{v ?? '—'}</output>
+        </label>
+      );
+    }
     case 'order': {
       const tokens = item.config?.tokens ?? [];
       const order =

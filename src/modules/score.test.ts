@@ -59,6 +59,15 @@ describe('scoreResponse', () => {
     expect(scoreResponse(t, { type: 'text', text: 'wrong' })?.score).toBe(0);
   });
 
+  it('scores a number-line answer via the checker, within tolerance', () => {
+    const nl = item({
+      interactionType: 'numberline',
+      answer: { type: 'numberline', value: 3, tolerance: 0.5 },
+    });
+    expect(scoreResponse(nl, { type: 'numberline', value: 3.4 })?.score).toBe(1);
+    expect(scoreResponse(nl, { type: 'numberline', value: 4 })?.score).toBe(0);
+  });
+
   it('scores an ordering answer by sequence', () => {
     const o = item({ interactionType: 'order', answer: { type: 'order', correctOrder: ['a', 'b', 'c'] } });
     expect(scoreResponse(o, { type: 'order', ordered: ['a', 'b', 'c'] })?.score).toBe(1);

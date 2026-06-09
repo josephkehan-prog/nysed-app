@@ -16,6 +16,8 @@ function correctResponse(answer: AnswerSpec): ResponsePayload {
       return { type: 'text', text: answer.accept[0] };
     case 'order':
       return { type: 'order', ordered: answer.correctOrder };
+    case 'numberline':
+      return { type: 'numberline', value: answer.value };
   }
 }
 
@@ -38,6 +40,8 @@ function wrongResponse(answer: AnswerSpec): ResponsePayload {
             ? [answer.correctOrder[1], answer.correctOrder[0], ...answer.correctOrder.slice(2)]
             : ['definitely-not-the-answer'],
       };
+    case 'numberline':
+      return { type: 'numberline', value: answer.value + 1000 };
   }
 }
 

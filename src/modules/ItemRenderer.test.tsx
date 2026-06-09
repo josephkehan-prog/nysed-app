@@ -43,6 +43,14 @@ describe('ItemRenderer', () => {
     expect(onChange).toHaveBeenCalledWith({ type: 'choice', selected: ['b'] });
   });
 
+  it('numberline: emits the value chosen on the slider', () => {
+    const onChange = vi.fn();
+    const nl = base({ interactionType: 'numberline', config: { min: 0, max: 10 } });
+    render(<ItemRenderer item={nl} value={null} onChange={onChange} />);
+    fireEvent.change(screen.getByRole('slider'), { target: { value: '7' } });
+    expect(onChange).toHaveBeenCalledWith({ type: 'numberline', value: 7 });
+  });
+
   it('order: emits the reordered sequence when a token is moved up', () => {
     const onChange = vi.fn();
     const ordered = base({

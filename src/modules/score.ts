@@ -3,6 +3,7 @@
 // scorer. 'explore' items (no answer) are not auto-scored.
 import { ComputeEngine } from '@cortex-js/compute-engine';
 import { scoreItem } from '../scoring/score';
+import { numberLineMatch } from '../interactions/checkers';
 import type { ResponseDeclaration, Score } from '../scoring/types';
 import type { PracticeItem, ResponsePayload } from './types';
 
@@ -76,6 +77,11 @@ export function scoreResponse(item: PracticeItem, response: ResponsePayload): Sc
       if (answer.type !== 'order') return wrong;
       const decl: ResponseDeclaration = { cardinality: 'ordered', correctResponse: answer.correctOrder };
       return scoreItem(decl, response.ordered);
+    }
+    case 'numberline': {
+      if (answer.type !== 'numberline' || response.value === null) return wrong;
+      const tol = answer.tolerance ?? item.config?.tolerance ?? 0;
+      return { score: numberLineMatch(response.value, answer.value, tol) ? maxScore : 0, maxScore };
     }
   }
 }

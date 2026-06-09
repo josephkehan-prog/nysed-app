@@ -5,7 +5,7 @@ import type { Subject } from '../nextera/tools';
 
 export type Domain = Subject; // 'math' | 'ela' — math first
 
-export type InteractionType = 'numeric' | 'math' | 'choice' | 'text' | 'order';
+export type InteractionType = 'numeric' | 'math' | 'choice' | 'text' | 'order' | 'numberline';
 
 export interface ChoiceOption {
   id: string;
@@ -20,10 +20,14 @@ export interface ItemConfig {
   tokens?: ChoiceOption[];
   /** choice: allow more than one selection. */
   multiple?: boolean;
-  /** numeric: absolute tolerance for a correct value (default 0). */
+  /** numeric / numberline: absolute tolerance for a correct value (default 0). */
   tolerance?: number;
   /** numeric: unit shown beside the field (cosmetic). */
   unit?: string;
+  /** numberline: slider range / step (cosmetic; default 0–10 step 1). */
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 /** How an item is graded. Mirrors InteractionType. */
@@ -32,7 +36,8 @@ export type AnswerSpec =
   | { type: 'math'; expected: string } // LaTeX, compared via Compute Engine
   | { type: 'choice'; correct: string[] } // option ids
   | { type: 'text'; accept: string[] } // accepted answers (compared normalized)
-  | { type: 'order'; correctOrder: string[] }; // token ids in the correct sequence
+  | { type: 'order'; correctOrder: string[] } // token ids in the correct sequence
+  | { type: 'numberline'; value: number; tolerance?: number }; // value on a number line
 
 /** What a controlled widget emits / what the player scores. Carries no keys. */
 export type ResponsePayload =
@@ -40,7 +45,8 @@ export type ResponsePayload =
   | { type: 'math'; latex: string }
   | { type: 'choice'; selected: string[] }
   | { type: 'text'; text: string }
-  | { type: 'order'; ordered: string[] };
+  | { type: 'order'; ordered: string[] }
+  | { type: 'numberline'; value: number | null };
 
 export type ModuleKind = 'practice' | 'explore'; // practice = auto-scored; explore = worked-solution reveal
 
