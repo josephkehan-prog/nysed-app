@@ -115,6 +115,12 @@ export function ModulePlayer({ module, onExit, onScored, onVisited }: ModulePlay
         <small>{module.meta.standards.join(' · ') || module.meta.cluster}</small>
       </p>
 
+      {module.passage ? (
+        <blockquote style={{ whiteSpace: 'pre-wrap', borderLeft: '3px solid #888', paddingLeft: 12 }}>
+          {module.passage}
+        </blockquote>
+      ) : null}
+
       {module.items.map((item, i) => (
         <ItemPanel
           key={i}

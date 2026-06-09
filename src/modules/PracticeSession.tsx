@@ -90,6 +90,11 @@ export function PracticeSession({ modules, onRecord, onExit }: PracticeSessionPr
         <small>{`Question ${index + 1} of ${steps.length}`}</small>
       </p>
       <h2>{mod.meta.title}</h2>
+      {mod.passage ? (
+        <blockquote style={{ whiteSpace: 'pre-wrap', borderLeft: '3px solid #888', paddingLeft: 12 }}>
+          {mod.passage}
+        </blockquote>
+      ) : null}
       <p style={{ whiteSpace: 'pre-wrap' }}>{item.stem}</p>
       <ItemRenderer item={item} value={response} onChange={setResponse} disabled={submitted !== null} />
       {submitted ? (

@@ -11,8 +11,11 @@ describe('module registry', () => {
     expect(m.items.length).toBeGreaterThan(0);
   });
 
-  it('has no ELA modules yet', async () => {
-    expect(await loadModules('ela')).toEqual([]);
+  it('loads ELA reading modules with passages', async () => {
+    const mods = await loadModules('ela');
+    expect(mods.length).toBeGreaterThan(0);
+    expect(mods.every((m) => m.meta.domain === 'ela')).toBe(true);
+    expect(mods.some((m) => typeof m.passage === 'string')).toBe(true);
   });
 
   it('groups modules by cluster', async () => {

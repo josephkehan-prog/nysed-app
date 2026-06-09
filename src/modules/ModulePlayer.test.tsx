@@ -72,6 +72,31 @@ describe('ModulePlayer', () => {
     expect(screen.getByRole('status')).toHaveTextContent(/not quite/i);
   });
 
+  it('renders a module-level passage above the items', () => {
+    const reading: LearningModule = {
+      meta: {
+        id: 'r',
+        domain: 'ela',
+        cluster: '6.RL',
+        standards: ['6.RL.1'],
+        title: 'A Reading',
+        kind: 'practice',
+        source: { name: 'S', license: 'CC BY 4.0', attribution: 'S' },
+      },
+      passage: 'The fox crossed the frozen river at dawn.',
+      items: [
+        {
+          stem: 'When did the fox cross?',
+          interactionType: 'choice',
+          config: { choices: [{ id: 'a', label: 'dawn' }, { id: 'b', label: 'noon' }] },
+          answer: { type: 'choice', correct: ['a'] },
+        },
+      ],
+    };
+    render(<ModulePlayer module={reading} onExit={() => {}} />);
+    expect(screen.getByText(/frozen river at dawn/i)).toBeInTheDocument();
+  });
+
   it('multi-item: renders every item and aggregates the score', () => {
     render(<ModulePlayer module={multiMod} onExit={() => {}} />);
     const inputs = screen.getAllByRole('spinbutton');

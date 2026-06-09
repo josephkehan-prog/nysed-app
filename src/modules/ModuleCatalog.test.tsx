@@ -13,9 +13,10 @@ describe('ModuleCatalog', () => {
     expect(screen.getByRole('heading', { name: '6.RP' })).toBeInTheDocument();
   });
 
-  it('shows an empty state for a domain with no modules', async () => {
+  it('renders ELA reading modules grouped by cluster', async () => {
     render(<ModuleCatalog domain="ela" onOpen={() => {}} />);
-    expect(await screen.findByText(/no modules yet/i)).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /lighthouse keeper/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '6.RL' })).toBeInTheDocument();
   });
 
   it('marks modules the student has already worked on', async () => {

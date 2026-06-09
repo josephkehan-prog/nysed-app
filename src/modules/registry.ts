@@ -4,7 +4,7 @@ import type { Domain, LearningModule } from './types';
 
 const LOADERS: Record<Domain, () => Promise<LearningModule[]>> = {
   math: () => import('./content/math/index').then((m) => m.modules),
-  ela: () => Promise.resolve([]),
+  ela: () => import('./content/ela/index').then((m) => m.modules),
 };
 
 export function loadModules(domain: Domain): Promise<LearningModule[]> {

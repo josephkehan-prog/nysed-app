@@ -82,5 +82,7 @@ export interface PracticeItem {
 
 export interface LearningModule {
   meta: ModuleMeta;
+  /** Optional shared passage shown above the items (e.g. an ELA reading). */
+  passage?: string;
   items: PracticeItem[];
 }
