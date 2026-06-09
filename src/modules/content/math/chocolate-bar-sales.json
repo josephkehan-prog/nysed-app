@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "chocolate-bar-sales",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.C.9"
+    ],
+    "title": "Chocolate Bar Sales",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Stephanie is helping her band collect money to fund a field trip. The band decided to sell boxes of chocolate bars. Each bar sells for $1.50 and each box contains 20 bars. Below is a partial table of monies collected for different numbers of boxes sold. Boxes Sold Money Collected b m 1 $30.00 5 $150.00 a. Complete the table above for values of m. b. Write an equation for the amount of money, m, that will be collected if b boxes of chocolate bars are sold. Which is the independent variable and which is the dependent variable? c. Graph the equation using the ordered pairs from the table above. d. Calculate how much money will be collected if 100 boxes of chocolate bars are sold. e. The band collected $1530.00 from chocolate bar sales. How many boxes did they sell?",
+      "interactionType": "text",
+      "workedSolution": "Solution: Table, Formula, Graph a. From the first row in the table, we see that the money collected, m, for one box sold, b, is $30.00 since there are 20 candy bars in the box, which cost $1.50 each. So, we multiply the number of boxes sold by 30 to find the amount of money collected. We fill in the remaining parts of the table as follows: b 2 Boxes Sold (b) Money Collected (m) 1 $30.00 2 $60.00 3 $90.00 4 $120.00 5 $150.00 6 $180.00 7 $210.00 8 $240.00 Note: We can arrive at the same amounts by repeatedly adding $30.00 as we move down from the first row, effectively adding $30.00 on for each box sold. As our values for m and b get very large in later parts of this task, addition becomes unrealistic, and multiplication is the easiest method. b. Using the information we found in part (a) that the amount of money collected, m, is equal to $30 multiplied by the number of boxes sold, b, we arrive at the following equation: m = 30b Since the equation represents m in terms of b, m is the dependent variable and b the independent variable. In this case, we are thinking about the situation as if the amount of money collected depends on the number of boxes that are sold; this interpretation makes sense as the students are first selling the chocolate and then finding how much money they made based on how much they sold. However, we could also write the equation b = m/30 and think of the number of boxes sold as depending on the amount of money raised. This is especially salient when we get to questions like the one in part (e); it is easy to imagine groups with different fundraising goals asking how many boxes they will have to sell to reach their target. c. If we plot the ordered pairs (b, m) from the completed table in part (a), we obtain the graph below. d. By substituting b = 100 into our equation from part (b), we see that m = 30(100) = 3000 and so $3,000.00 will be collected if 100 boxes of chocolate bars are sold. e. We will still use our equation from part (b) for this problem, but in this situation m is known, and we will be solving for b. Substituting m = 1530, we see that 1530 = 30b 1530 =b 51 = b Thus, the band sold 51 boxes of chocolate bars. Solution: Table Only It would be possible to solve the the last two parts of the problem with a table only. a. See above b. See above c. See above d. We can use the pattern of adding $30 for each additional box until we get to 10 boxes and then continue in multiples of 10 boxes. Once we have the cost for 20 and 30 boxes we get 50 boxes, and we can double the amount for 50 boxes to get to 100 boxes. Boxes Sold (b) Money Collected (m) 1 $30.00 2 $60.00 3 $90.00 4 $120.00 5 $150.00 6 $180.00 7 $210.00 8 $240.00 9 $270.00 10 $300.00 20 $600.00 30 $900.00 50 $1500.00 100 $3000.00 e. We already have a table entry that shows that 50 boxes cost $1500 and one more box is an additional $30. Therefore, the band sold 51 boxes."
+    }
+  ]
+}

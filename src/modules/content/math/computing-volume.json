@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "computing-volume",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": [
+      "6.G.A.2"
+    ],
+    "title": "Computing Volume",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "a. Amy wants to build a cube with 3 cm sides using 1 cm cubes. How many cubes does she need? b. How many 1 cm cubes would she need to build a cube with 6 cm sides?",
+      "interactionType": "text",
+      "workedSolution": "a. Each single layer of cubes contains 3 × 3 = 9 cubes. There are 3 layers, so Amy needs 3 × 9 = 27 one cm cubes in all. Or, a shorter way: Amy needs 3 × 3 × 3 = 27 one cm cubes. b. Now each single layer of cubes contains 6 × 6 = 36 cubes. There are 6 layers, so Amy needs 6 × 36 = 216 one cm cubes in all. As before, we can simply compute 6 × 6 × 6 to get the number of one cm cubes. Amy needs 216 one cm cubes. Progression 1"
+    }
+  ]
+}

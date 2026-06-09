@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "id": "firefighter-allocation",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.B.6",
+      "6.EE.B.7"
+    ],
+    "title": "Firefighter Allocation",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "A town's total allocation for firefighter's wages and beneﬁts in a new budget is $600,000. If wages are calculated at $40,000 per firefighter and beneﬁts at $20,000 per firefighter, write an equation whose solution is the number of firefighters the town can employ if they spend their whole budget. Solve the equation.",
+      "interactionType": "text",
+      "workedSolution": "Solution: Equation 1 If x represents the maximum number of firemen that could be employed, then 600,000 = 40,000x + 20,000x. combining like terms we have 600,000 = 60,000x Thus x = 10, so ten firemen could be employed. Solution: Equation 2 The total cost per firefighter is 40,000 + 20,000 = 60,000. If x represents the number of firefighters that could be employed with the given budget amount, then 60,000x = 600,000. Dividing both sides by 60,000 gives us that x = 10, so ten firefighters could be employed by the town."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "price-per-pound-and",
+    "domain": "math",
+    "cluster": "6.RP",
+    "standards": [
+      "6.RP.A.2"
+    ],
+    "title": "Price per pound and",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "The grocery store sells beans in bulk. The grocer's sign above the beans says, 5 pounds for $4. At this store, you can buy any number of pounds of beans at this same rate, and all prices include tax. Alberto said, “The ratio of the number of dollars to the number of pounds is 4:5. That's $0.80 per pound.” Beth said, \"The sign says the ratio of the number of pounds to the number of dollars is 5:4. That's 1.25 pounds per dollar.\" a. Are Alberto and Beth both correct? Explain. b. Claude needs two pounds of beans to make soup. Show Claude how much money he will need. c. Dora has $10 and wants to stock up on beans. Show Dora how many pounds of beans she can buy. d. Do you prefer to answer parts (b) and (c) using Alberto's rate of $0.80 per pound, using Beth's rate of 1.25 pounds per dollar, or using another strategy? Explain.",
+      "interactionType": "text",
+      "workedSolution": "(a) Alberto and Beth are both correct. Their rates could be illustrated with a double number line or a ratio table like the following: Pounds Dollars 1 .80 1.25 1 2.5 2 5 4 (b) Double the quantities in Alberto's rate to find the price of two pounds: Pounds Dollars 1 .80 2 1.60 (c) Starting from Beth's rate and multiplying both quantities by ten shows the number of pounds that can be purchased for 10 dollars: Pounds Dollars 1.25 1 12.50 10 (d) Answers may vary. We can efficiently answer part (b) using Alberto's rate and part (c) using Beth's rate. pounds per dollar"
+    }
+  ]
+}

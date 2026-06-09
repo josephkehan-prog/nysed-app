@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "id": "painting-a-barn",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": [
+      "6.G.A",
+      "6.RP.A.3"
+    ],
+    "title": "Painting a Barn",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Alexis needs to paint the four exterior walls of a large rectangular barn. The length of the barn is 80 feet, the width is 50 feet, and the height is 30 feet. The paint costs $28 per gallon, and each gallon covers 420 square feet. How much will it cost Alexis to paint the barn? Explain your work.",
+      "interactionType": "text",
+      "workedSolution": "First Alexis needs to find the area she needs to paint. Alexis will need to paint two 30 foot - by - 50 foot walls and two 30 foot - by - 80 foot walls. 2 × 30 feet × 50 feet = 3000 square feet 2 × 30 feet × 80 feet = 4800 square feet Alexis will need to paint 3000 + 4800 = 7800 square feet. Next, the table below shows how many square feet she can cover with different quantities of paint. Number of gallons of paint Area covered 1 420 5 2100 10 4200 15 6300 20 8400 20 gallons is a little more than she needs, so she can check 19 gallons and 18 gallons: Number of gallons of paint Area covered 1 420 5 2100 10 4200 15 6300 20 8400 19 7980 18 7560 18 gallons isn't quite enough and 19 gallons is a bit more than she needs. Since paint is usually sold in whole gallons, it makes sense for Alexis to buy 19 gallons of paint. Finally, since paint costs $28 per gallon, the total cost will be 19 gallons × $28 per gallon = $532 It will cost Alexis $532 to paint the barn."
+    }
+  ]
+}

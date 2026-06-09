@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "id": "the-escalator-assessment",
+    "domain": "math",
+    "cluster": "6.RP",
+    "standards": [
+      "6.RP.A.1",
+      "6.RP.A.2"
+    ],
+    "title": "The Escalator, Assessment",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Ty took the escalator to the second floor. The escalator is 12 meters long, and he rode the escalator for 30 seconds. Which statements are true? Select all that apply. a. He traveled 2 meters every 5 seconds. b. Every 10 seconds he traveled 4 meters. c. He traveled 2.5 meters per second. d. He traveled 0.4 meters per second. e. Every 25 seconds, he traveled 7 meters.",
+      "interactionType": "text",
+      "workedSolution": "This is a one-point item. (a), (b) and (d) are all correct. Variation"
+    }
+  ]
+}

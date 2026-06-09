@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "id": "wallpaper-decomposition",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": [],
+    "title": "Wallpaper Decomposition",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Jamie is planning to cover a wall with red wallpaper. The dimensions of the wall are shown below: a. How many square feet of wallpaper are required to cover the wall? b. Wallpaper comes in long rectangular strips which are 24 inches wide. If Jamie lays the strips of wallpaper vertically, can she cover the wall without wasting any wallpaper? Explain. c. If Jamie lays the strips of wallpaper horizontally, can she cover the wall without wasting any wallpaper? Explain.",
+      "interactionType": "text",
+      "workedSolution": "a. One natural way to find the area of the wall is by decomposition. If we draw a horizontal line 8 feet up the wall, we break the wall into an 8 foot by 8 foot square and a triangle: The base of the triangle is 8 feet and its height is 2 feet. The square has an area of 64 square feet and the triangle has an area of 8 feet × 2 feet = 8 square feet. So the total area of the wall is 64 + 8 = 72 square feet. Another way to find the area of the wall is to notice that we can draw an 8 foot by 10 foot rectangle around the wall. This rectangle has an area of 80 square feet. To get the wall, we remove two right triangles. Together, these make half of a 2 foot by 8 foot rectangle and so they have an area of 8 square feet. Hence, the area of the wall is 80 - 8 = 72 square feet. b. Jamie will need to cut the strips since the top of the wall does not lay horizontally while the top of the vertical strips of wallpaper will lay horizontally. One nice way Jamie could cover the wall with vertical strips would be to make cut two 18 foot strips of paper. Each of these strips then needs to be cut ''diagonally,'' eight feet up one side and nine feet up the other side: c. With horizontal strips of wallpaper, 4 strips, each 8 feet long, will cover the square part of the wall leaving the triangle at the top. Jamie can next take a 4 foot long strip of wallpaper, making a 2 foot by 4 foot rectangle. If this rectangle is cut diagonally, Jamie gets two right triangles measuring 2 feet by 4 feet and these can be placed at the top of the wall: is licensed by Illustrative Mathematics under a"
+    }
+  ]
+}

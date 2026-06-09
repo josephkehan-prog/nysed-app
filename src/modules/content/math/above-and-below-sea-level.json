@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "above-and-below-sea-level",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": [
+      "6.NS.C.7"
+    ],
+    "title": "Above and below sea level",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "The table below shows the lowest elevation above sea level in three American cities. City State Elevation above sea level Elevation below sea level Denver Colorado 5130 New Orleans Louisiana -8 Seattle Washington 0 Finish filling in the table as you think about the following statements. Decide whether each of the following statements is true or false. Explain your answer for each one. a. New Orleans is ∣−8∣ feet below sea level. b. New Orleans is −8 feet below sea level. c. New Orleans is 8 feet below sea level. d. Seattle is 0 feet above sea level. e. Seattle is |0∣ feet below sea level. f. Denver is −5130 feet below sea level. g. Denver is ∣−5130∣ feet below sea level. h. Denver is −∣5130∣ feet below sea level. −∣5130∣",
+      "interactionType": "text",
+      "workedSolution": "a. True. New Orleans is ∣−8∣ = 8 feet below sea level. We measure positive distances above sea level, so a point that is a negative \"distance\" above sea level is actually below sea level. b. False. −8 feet below sea level is 8 feet above sea level.... c. True. New Orleans is 8 feet below sea level (see part (a)). d. True. Seattle is 0 feet above sea level because 0 feet above or below sea level is the same as being at sea level. e. True. Seattle is ∣0∣ = 0 feet below sea level (see part (d)). f. True. Denver is −5130 feet below sea level because if we were to measure positive distances below sea level, then negative distances (or, more accurately, a negative displacement) would be above sea level. g. False. Denver is ∣−5130∣ = 5130 feet above sea level. h. True. Denver is −|5130∣ = −5130 feet below sea level (see part (f)). City State Elevation above sea level Elevation below sea level 2 City State Elevation above sea level Elevation below sea level Denver Colorado 5130 -5130 -8 8 New Orleans Louisiana 0 0 Seattle Washington"
+    }
+  ]
+}

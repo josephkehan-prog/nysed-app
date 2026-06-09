@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "height-requirements",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.B.8"
+    ],
+    "title": "Height Requirements",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "At Sea World San Diego, kids are only allowed into the Air Bounce if they are between 37 and 61 inches tall. They are only allowed on the Tide Pool Climb if they are 39 inches tall or under: a. Represent the height requirements of each ride with inequalities. b. Show the allowable heights for the rides on separate number lines. c. Using inequalities and a number line, describe the height of kids who can go on the both the Air Bounce and the Tide Pool Climb.",
+      "interactionType": "text",
+      "workedSolution": "a. For the Air Bounce, children must be at least 37 inches tall. If we let h denote the child's height in inches, this means h ≥ 37. They are also not allowed to be more than 61 inches tall so h ≤ 61. We say h ≥ 37 and h ≤ 61. (This can be written as a compound inequality, but that is not expected at grade 6) For the Tide Pool Climb, children are not allowed to be over 39 inches. Using h for the child's height, this is represented by h ≤ 39. We should also write this as 0 < h since a height cannot be zero or negative. b. The allowable heights in inches for Air Bounce are shaded blue on the number line below (note that they include 37 inches and 61 inches). No negative numbers are included on the number line as this does not make sense for the context of height. The allowable heights for Tide Pool Climb are shaded purple on the number line below: Although it is not possible for a child to be close to 0 inches tall, these numbers are shaded because they fit the inequality h ≤ 39. No negative numbers (or 0) are plotted because they do not make sense in the context of height. So the graph shows heights satisfying 0 < h and h ≤ 39. c. In order go on the Tide Pool Climb, a child cannot be over 39 inches in height. In order to go on the Air Bounce, a child has to be at least 37 inches tall but not more than 61 inches. So to go on both, a child must be at least 37 inches tall but not more than 39 inches: 37 ≤ h and h ≤ 39. These heights in inches are highlighted on the number line below: Notice that the shaded parts of this number line are where the shaded parts of the two previous underlines overlap: this makes sense as we are looking for heights of those who can go on both rides."
+    }
+  ]
+}

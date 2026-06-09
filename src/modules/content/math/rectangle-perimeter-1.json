@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "rectangle-perimeter-1",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.A.2"
+    ],
+    "title": "Rectangle Perimeter 1",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "To compute the perimeter of a rectangle you add the length, l and width, w and double this sum. a. Write an expression for the perimeter of a rectangle. b. Use the expression to ﬁnd the perimeter of a rectangle with length 30 and width 75.",
+      "interactionType": "text",
+      "workedSolution": "a. The description for computing the perimeter of a rectangle first adds the length l and the width w of the rectangle l+w Then it asks us to double this sum, that means we are taking the sum and multiplying it by 2: perimeter of a rectangle = 2(l + w) b. Letting l = 30 and w = 75 we have perimeter of this rectangle = 2(30 + 75) = 2(105) = 210."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "nets-for-pyramids-and",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": [
+      "6.G.A.4"
+    ],
+    "title": "Nets for Pyramids and",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "a. Below is a net for a three dimensional shape: The inner quadrilateral is a square and the four triangles all have the same size and shape. i. What three dimensional shape does this net make? Explain. ii. If the side length of the square is 2 units and the height of the triangles is 3 units, what is the surface area of this shape? b. Draw a net for a rectangular prism whose base is a one inch by one inch square and whose faces are 3 inches by 1 inch. i. Is there more than one possible net for this shape? Explain. ii. What is the surface area of the prism?",
+      "interactionType": "text",
+      "workedSolution": "a. i. This pattern will make a square pyramid, that is a pyramid with a square base. The four triangular sides all meet at the apex of the pyramid. ii. The area of the square base will be 4 square units. The four faces of the pyramid all have the same area. Since each base is 2 units and each height is 3 units the area of one triangle is 2 ×2×3 = 3 square units. So all four triangular faces have an area of 12 square units, and the total surface area of the pyramid is 4 + 12 = 16 square units. b. An example of a net is pictured here: i. There are many different nets for this rectangular prism. We could, for example, leave the four rectangles one on top of the other as in the picture above and move the two square bases: the only restraint is that they need to share a side with one of the four rectangles and they cannot both be on the left or both be on the right. There are other possible nets as well, such as the one pictured below: Each square is one inch by one inch and each rectangle is 3 inches by 1 inch. ii. To calculate the surface area of this rectangular prism we add the areas of the square bases (1 square inch each) to the areas of the rectangular faces (3 square inches each). There are two square bases and 4 rectangular faces so the total area is 2 × 1 + 4 × 3 = 14 square inches. Prisms"
+    }
+  ]
+}

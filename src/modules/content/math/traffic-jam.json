@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "traffic-jam",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": [
+      "6.NS.A.1"
+    ],
+    "title": "Traffic Jam",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "You are stuck in a big traffic jam on the freeway and you are wondering how long it will take to get to the next exit, which is 1 2 miles away. You are timing your progress and find that you can progress at this travel 2 of a mile in one hour. If you continue to make rate, how long will it be until you reach the exit? Solve the problem with a diagram and explain your answer.",
+      "interactionType": "text",
+      "workedSolution": "Solution: Number Line Using a double number line where one line is measured in miles and the other one is measure in hours we get the following diagram. htITnohooidusrrrwdisv.eaeTryh1twoa12temmleceaailanevsesuf.sinre61dbm1o21itlhem, 12wilemhsicialhenswdailn32l dtmak31ielems41.ilDehsro,iuvwirnetgodtidwvriodivee32.thmTehile1ermestforileerteci,nhitteotsat16kaemkseis2let14wphioeocuerss. Since we are asking \"How many 2 are there in 1 1 ?\" this is a \"How many groups?\" 3 2 division problem: 1 1 ÷ 2 =? 2 3 We have found that the answer to this division problem is 2 1 . Solution: Linker Cubes Using linker cubes we need at least 6 linker cubes to represent 1 mile in order to divide the mile into thirds and halves at the same time. (Note: Any multiple of 6 would also 1 2 work.) So 1 2 miles is represented by 9 linker cubes and 3 of a mile is represented by 4 linker cubes. Now the question becomes: How many times do the 4 linker cubes ( 2 mile) fit into the 9 linker cubes (1 1 miles)? The answer is 1+1 + 1 = 2 1 . (see photo 2 4 4 below) Since we are asking \"How many 2 are there in 1 1 ?\" this is a \"How many groups?\" 3 2 division problem: 1 1 ÷ 2 =? 2 3 21 2 We have found that the answer to this division problem is 2 1 . Note: This problem could lead into a discovery of a “common denominator” procedure for dividing fractions: Find a common denominator of both fractions, then just divide the numerators: 1 1 ÷ 2 = 9 ÷ 4 = 9( 1 ) ÷ 4( 1 ) = 9÷4 = 9 = 2 1 . 2 3 6 6 6 6 4 4 Solution: Number line solution Since 1 1 = 9 and it takes an hour to 41trhaoveulrs32 = 4 miles, we can look at the number 2 6 that it 6 the exit. lines above and see will take 2 to travel the distance to Since we are asking \"How many 2 are there in 1 1 ?\" this is a \"How many groups?\" 3 2 division problem: 1 1 ÷ 2 =? 2 3 We have found that the answer to this division problem is 2 1 ."
+    }
+  ]
+}

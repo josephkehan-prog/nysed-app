@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "rectangle-perimeter-2",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.A.4"
+    ],
+    "title": "Rectangle Perimeter 2",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "The students in Mr. Nolan's class are writing expressions for the perimeter of a rectangle of side length ℓ and width w. After they share their answers, the following expressions are on the board: Sam: 2(ℓ + w) Joanna: ℓ + w + ℓ + w Kiyo: 2ℓ + w Erica: 2w + 2ℓ Which of the expressions are correct and how might the students have been thinking about finding the perimeter of the rectangle?",
+      "interactionType": "text",
+      "workedSolution": "Sam's answer is the same as discussed in task Rectangle Perimeter 1. He first added length l and width w and then multiplied the sum (l + w) by two. Joanna's answer is equivalent to Sam's answer. If we insert parentheses into Joanna's expression we see that l + w + l + w = (l + w) + (l + w) = 2(l + w). Joanna might have started at one side of the rectangle and then have gone around adding adjacent sides until all four sides have been accounted for: length + width + length + width. Kiyo's expression results in different values for the same rectangle than Sam's and Joanna's expressions do. For example, for l = 2 feet and w = 3 feet, Sam and Joanna's expressions give a perimeter of 10 feet and Kiyo's expression gives a perimeter of 7 feet. Kiyo's expression is missing one width of the rectangle. He added the length twice (2l) but the width only once (w). If he inserted parentheses around (l + w), his expression would be the same as Sam's. Erica's expression is equivalent to both Sam's and Joanna's expressions. If in Sam's expression we use the distributive property to distribute the factor of 2, and then use the commutative property of addition to switch the order of addition, we get Erica's expression: 2(l + w) = 2l + 2w = 2w + 2l."
+    }
+  ]
+}
