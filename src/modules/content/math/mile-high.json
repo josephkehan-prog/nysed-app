@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "mile-high",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": [
+      "6.NS.C.5"
+    ],
+    "title": "Mile High",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Denver, Colorado is called “The Mile High City” because its elevation is 5280 feet above sea level. Someone tells you that the elevation of Death Valley, California is −282 feet. a. Is Death Valley located above or below sea level? Explain. b. How many feet higher is Denver than Death Valley? c. What would your elevation be if you were standing near the ocean?",
+      "interactionType": "text",
+      "workedSolution": "a. Death Valley is located below sea level. We know this because its elevation is negative. Sea level is the base for measuring elevation. Sea level elevation is defined as 0 ft. All other elevations are measured from sea level. Those places on Earth that are above sea level have positive elevations, and those places on Earth that are below sea level have negative elevations. Thus, Death Valley, with an elevation of -282 feet, is located below sea level. b. To find out how much higher Denver is than Death Valley, we can reason as follows: Death Valley is 282 feet below sea level. Denver is 5280 above sea level. So to go from Death Valley to Denver, you would go up 282 feet to get to sea level and then go up another 5280 feet to get to Denver for a total of 282 + 5280 = 5562. feet. Thus, Denver, Colorado is 5562 feet higher than Death Valley, California. c. If you were standing near the ocean, your elevation would be close to zero. Depending on how high or low the tide is and where exactly you are standing, your elevation could be as low as -50 feet (or as high as 50 feet) if you are at the edge of a very low tide (or a very high tide, respectively) at the Bay of Fundy."
+    }
+  ]
+}

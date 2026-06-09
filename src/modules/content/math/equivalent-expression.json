@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "id": "practice-equivalent-expression",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": ["6.EE.A.3"],
+    "title": "Distributive Property",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Use the distributive property to write an expression equivalent to 6(x + 2). Enter your answer in the form ax + b.",
+      "interactionType": "math",
+      "answer": { "type": "math", "expected": "6x+12" },
+      "workedSolution": "6(x + 2) = 6 · x + 6 · 2 = 6x + 12."
+    }
+  ]
+}

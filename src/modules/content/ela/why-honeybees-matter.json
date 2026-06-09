@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "id": "ela-why-honeybees-matter",
+    "domain": "ela",
+    "cluster": "6.RI",
+    "standards": ["6.RI.1", "6.RI.2", "6.RI.4"],
+    "title": "Why Honeybees Matter",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original passage)" }
+  },
+  "passage": "Honeybees do far more than make honey. As they move from flower to flower collecting nectar, they carry pollen with them. This pollination helps plants produce the fruits, vegetables, and seeds that people and animals rely on for food. Scientists estimate that bees help pollinate a large share of the crops grown around the world. In recent years, however, bee populations have declined, partly because of disease and the use of certain pesticides. Many farmers and researchers are now working to protect bees by planting flowers, reducing harmful chemicals, and keeping hives healthy. Protecting honeybees, they argue, is really about protecting our food supply.",
+  "items": [
+    {
+      "stem": "What is the central idea of the passage?",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "Honeybees are important mainly because they make honey." },
+          { "id": "b", "label": "Bee populations are declining and nothing can be done about it." },
+          { "id": "c", "label": "Protecting honeybees matters because they help produce much of our food." },
+          { "id": "d", "label": "Farmers dislike honeybees and want fewer of them." }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["c"] },
+      "workedSolution": "The passage explains how bees support the food supply and why protecting them matters — choice C captures that whole idea."
+    },
+    {
+      "stem": "Select the TWO reasons the passage gives for the decline in bee populations.",
+      "interactionType": "choice",
+      "config": {
+        "multiple": true,
+        "choices": [
+          { "id": "a", "label": "disease" },
+          { "id": "b", "label": "the use of certain pesticides" },
+          { "id": "c", "label": "too much rain" },
+          { "id": "d", "label": "colder winters" }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["a", "b"] },
+      "workedSolution": "The passage names two causes: \"disease and the use of certain pesticides.\""
+    },
+    {
+      "stem": "In the passage, \"pollination\" most nearly refers to —",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "making honey out of nectar" },
+          { "id": "b", "label": "carrying pollen between plants so they can produce food" },
+          { "id": "c", "label": "the decline of bee populations" },
+          { "id": "d", "label": "spraying crops with chemicals" }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["b"] },
+      "workedSolution": "The sentence before \"pollination\" describes bees carrying pollen from flower to flower, which helps plants produce food — choice B."
+    }
+  ]
+}

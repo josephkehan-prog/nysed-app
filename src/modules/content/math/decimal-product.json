@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "id": "practice-decimal-product",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": ["6.NS.B.3"],
+    "title": "Multiplying Decimals",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Multiply: 4.6 × 2.5",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 11.5 },
+      "workedSolution": "4.6 × 2.5 = 11.5. (46 × 25 = 1150, then place two decimal places: 11.50.)"
+    }
+  ]
+}

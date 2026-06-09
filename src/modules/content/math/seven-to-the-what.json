@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "seven-to-the-what",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": [
+      "6.EE.A.1"
+    ],
+    "title": "Seven to the What?!?",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "a. What is the last digit of 72011? Explain. b. What are the last two digits of 72011? Explain.",
+      "interactionType": "text",
+      "workedSolution": "Solution: 1 Making a Table Below is a table listing the first 8 powers of 7 along with the final digits of these powers: Power of 7 Result Last two digits 71 7 07 72 49 49 73 343 43 74 2401 01 75 16, 807 07 76 117, 649 49 77 823, 543 43 78 5, 764, 801 01 Notice that the last two digits are following a simple repeating pattern: 07, 49, 43, 01. We are interested in the 2011th number in this sequence. The 2000th power will go through this sequence of 4 numbers 2000 ÷ 4 = 500 times. The 2008th power will go through this sequence of 4 numbers 2 more times. Thus 72009 will end in 07, 72010 ends in 49 and 72011 ends in 43. So we have an answer to both questions: a. The ones place of 72011 is a 3. b. The tens place of 72011 is a 4. Solution: 2 Reasoning with place value a. To find successive powers of 7, we can multiply by 7 repeatedly, with 2011 factors of 7 in all to get 72011. We are only interested in the ones place and start with 73 as an example: 73 = 7 × 72 = 7 × 49 = 7 × (4 × 10 + 9) = (7 × 4 × 10) + (7 × 9). 3 = (7 × 4 × 10) + (7 × 9). Since 7 × 9 = 63, the ones place of 73 will be 3. Notice that the 4 tens in 49 do not play a role in determining the ones place of the product. This makes sense as these tens will only influence the higher place values in the product. So when we are looking to find the ones digit of 72011 we only need to pay attention to the ones digit in each successive power. Starting with the first power these are 7, 9, 3, 1 and then the sequence repeats. Since 2011 = 502 × 4 + 3 this means that for 72011 we will go completely through this sequence of last digits 502 times and then land on the third one which is 3. So the last digit of 72011 is 3. b. We can apply the same reasoning to find the last two digits of 72011. Taking 74 as an example, note that 74 = 7 × 73 = 7 × 343 = 7 × (3 × 100 + 43) = (7 × 3 × 100) + (7 × 43). As above, the only part of this expression which contributes to the tens and ones digits is 7 × 43. We have 7 × 43 = 301 and so the digit in the hundreds place of 74 is 0 and the digit in the ones place of 74 is 1. At this point we enter a nice pattern as we see by studying at 75 = 7 × 74 : since we know 74 has a zero in the hundreds place and a 1 in the ones place, when we multiply by 7 we will get a 0 in the hundreds place and a 7 in the ones place. So we will be back to where we started with the same tens digit and ones digit as 71 . This pattern will continue so the first, fifth, ninth (and so on) powers of 7 end in 07. Since 2009 = 502 × 4 + 1 this means that the last two digits of 72009 are 07. For 72010 we have to multiply by 7 so this gives 49 for the last two digits. For 72011 we multiply by 7 again giving 43 for the last two digits."
+    }
+  ]
+}

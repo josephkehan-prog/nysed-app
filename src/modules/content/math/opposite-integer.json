@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "id": "practice-opposite-integer",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": ["6.NS.C.6"],
+    "title": "Opposites on the Number Line",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "What is the opposite of −7 on the number line?",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 7 },
+      "workedSolution": "The opposite of a number is the same distance from 0 on the other side. The opposite of −7 is 7."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "id": "polygons-in-the-coordinate",
+    "domain": "math",
+    "cluster": "6.G",
+    "standards": [
+      "6.G.A.1",
+      "6.G.A.3"
+    ],
+    "title": "Polygons in the Coordinate",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "The vertices of eight polygons are given below. For each polygon: Plot the points in the coordinate plane and connect the points in the order that they are listed. Color the shape the indicated color and identify the type of polygon it is. Find the area. a. The first polygon is GREY and has these vertices: (−7, 4) (−8, 5) (−8, 6) (−7, 7) (−5, 7) (−5, 5) (−7, 4) b. The second polygon is ORANGE and has these vertices: (−2, −7) (−1, −4) (3, −1) (6, −7) (−2, −7) c. The third polygon is GREEN and has these vertices: (4, 3) (3, 3) (2, 2) (2, 1) (3, 0) (4, 0) (5, 1) (5, 2) (4, 3) d. The fourth polygon is BROWN and has these vertices: (0, −10) (0, −8) (7, −10) (0, −10) e. The fifth polygon is PURPLE and has these vertices: (−8, −5) (−8, −8) (−5, −8) (−5, −5) (−8, −5) f. The sixth polygon is PINK and has these vertices: (9, −1) (6, 1) (6, −3) (9, −1) g. The seventh polygon is BLUE and has these vertices: (−6, −4) (−6, 1) (−9, 1) (−9, −4) (−6, −4) h. The eighth polygon is YELLOW and has these vertices: (−5, 1) (−3, −3) (−1, −2) (0, 3) (−3, 3) (−5, 1)",
+      "interactionType": "text",
+      "workedSolution": "Here are the figures: a. The grey polygon is a hexagon. b. The orange polygon is a quadrilateral. c. The green polygon is an octagon. d. The brown polygon is a triangle. e. The purple polygon is a square. f. The pink polygon is a triangle. g. The blue polygon is a rectangle. h. The yellow polygon is a pentagon. There are many ways to find the areas of the polygons. One way is to break each one up into triangles and rectangles. Here is one way to do that: a. The grey polygon has an area of 7 square units. b. The orange polygon has an area of 28.5 square units. c. The green polygon has an area of 7 square units. d. The brown polygon has an area of 7 square units. e. The purple polygon has an area of 9 square units. f. The pink polygon has an area of 6 square units. g. The blue polygon has an area of 15 square units. h. The yellow polygon has an area of 19.5 square units. Plane"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "distances-between-points",
+    "domain": "math",
+    "cluster": "6.NS",
+    "standards": [
+      "6.NS.C.8"
+    ],
+    "title": "Distances between Points",
+    "kind": "explore",
+    "source": {
+      "name": "Illustrative Mathematics",
+      "license": "CC BY-NC-SA 4.0",
+      "attribution": "Illustrative Mathematics, illustrativemathematics.org",
+      "url": "https://www.illustrativemathematics.org"
+    }
+  },
+  "items": [
+    {
+      "stem": "Some points are shown in the coordinate plane below. a. What is the distance between points B & C? b. What is the distance between points D & B? c. What is the distance between points D & E? d. Which of the points shown above are 4 units away from (−1, −3) and 2 units away from (3, −1)?",
+      "interactionType": "text",
+      "workedSolution": "a. The distance between points B and C is 5 units, as indicated below. We can determine the distance between points B and C by counting the units between the two points since they are on the same vertical line which happens to be a grid line. We can also note that the coordinates for B are (3, 2) and so it is |2| units above the x- axis. Similarly, the coordinates for C are (3, −3), so it is |-3| units below the x-axis. Thus, the distance between B and C is |2| + | − 3| = 5 units. b. The distance between points D and B is 7 units, as indicated below. c. The distance between points D and E is 4 units, as indicated below. d. Point C is the only one of points A, … E that is both 4 units away from (−1, −3) and 2 units away from (3, −1). There is another point that satisfies these two criteria (which is the other intersection point of the circle of radius 4 and circle of radius 2 shown below), but it does not have integer coordinates and is not one of the points identified in the task statement."
+    }
+  ]
+}

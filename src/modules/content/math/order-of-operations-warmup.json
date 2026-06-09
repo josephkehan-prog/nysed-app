@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "id": "practice-order-of-operations",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": ["6.EE.A.2"],
+    "title": "Order of Operations Warm-up",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Evaluate: 2 × (3 + 4)",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 14 },
+      "workedSolution": "Parentheses first: 3 + 4 = 7, then 2 × 7 = 14."
+    },
+    {
+      "stem": "Evaluate: 20 − 3 × 4",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 8 },
+      "workedSolution": "Multiply before subtracting: 3 × 4 = 12, then 20 − 12 = 8."
+    }
+  ]
+}

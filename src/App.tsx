@@ -1,111 +1,129 @@
-import { lazy, Suspense, useReducer } from 'react';
-import { Toolbar } from './nextera/Toolbar';
-import { Calculator } from './components/Calculator';
-import { MathText } from './components/MathText';
-import { AccommodationsBar } from './components/AccommodationsBar';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import { LoginPortal } from './auth/LoginPortal';
 import { DomainSelect } from './auth/DomainSelect';
 import { portalReducer, initialPortalState } from './auth/flow';
-import { DOMAIN_LABELS } from './auth/roster';
-import { visibleSections } from './nextera/sections';
+import { DOMAIN_LABELS, type Student } from './auth/roster';
+import { ModuleCatalog } from './modules/ModuleCatalog';
+import { ModulePlayer } from './modules/ModulePlayer';
+import { MasterySummary } from './modules/MasterySummary';
+import { PracticeSession } from './modules/PracticeSession';
+import { buildPracticeSession, buildReviewSession } from './modules/session';
+import { loadModules } from './modules/registry';
+import { AccommodationsBar } from './components/AccommodationsBar';
+import { AccommodationsProvider, useAccommodations } from './a11y/AccommodationsContext';
+import { createLocalProgressStore } from './progress/store';
+import type { LearningModule } from './modules/types';
 import type { Subject } from './nextera/tools';
 
-// Heavy tool libraries (Excalidraw, Mafs, Tiptap, MathLive) are code-split so the
-// app shell paints first instead of shipping one multi-MB bundle.
-const GraphPlot = lazy(() => import('./components/GraphPlot').then((m) => ({ default: m.GraphPlot })));
-const MathField = lazy(() => import('./components/MathField').then((m) => ({ default: m.MathField })));
-const WritingSpace = lazy(() =>
-  import('./components/WritingSpace').then((m) => ({ default: m.WritingSpace })),
-);
-const ScratchPad = lazy(() => import('./components/ScratchPad').then((m) => ({ default: m.ScratchPad })));
-
-function Loading() {
-  return <p>Loading…</p>;
-}
-
-interface TestShellProps {
-  studentName: string;
-  grade: number;
-  subject: Subject;
+interface DomainHomeProps {
+  domain: Subject;
+  student: Student;
   onSignOut: () => void;
 }
 
-/** The Nextera-style practice shell, entered only after sign-in and domain
- * selection. Tool availability follows the chosen grade/subject. */
-function TestShell({ studentName, grade, subject, onSignOut }: TestShellProps) {
-  const sections = visibleSections(subject);
+/** A domain's home: browse the module catalog (with per-cluster progress), play a
+ * chosen module, and persist attempts/visits to the local ProgressStore. The
+ * AccommodationsProvider scopes accommodations to this signed-in session. */
+function DomainHome(props: DomainHomeProps) {
   return (
-    <main style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16 }}>
+    <AccommodationsProvider>
+      <DomainHomeBody {...props} />
+    </AccommodationsProvider>
+  );
+}
+
+function DomainHomeBody({ domain, student, onSignOut }: DomainHomeProps) {
+  const { state: accommodations } = useAccommodations();
+  const store = useMemo(() => createLocalProgressStore(), []);
+  const studentId = student.username;
+  const [selected, setSelected] = useState<LearningModule | null>(null);
+  // Bumped whenever progress is written, so the catalog/mastery views refresh.
+  const [version, setVersion] = useState(0);
+
+  const engagedIds = useMemo(
+    () => store.engagedModuleIds(studentId),
+    [store, studentId, version],
+  );
+  const mastery = useMemo(() => store.masteryByStandard(studentId), [store, studentId, version]);
+
+  // Modules for this domain, loaded once, used to build a practice session.
+  const [modules, setModules] = useState<LearningModule[]>([]);
+  useEffect(() => {
+    let live = true;
+    loadModules(domain).then((m) => {
+      if (live) setModules(m);
+    });
+    return () => {
+      live = false;
+    };
+  }, [domain]);
+  const practice = useMemo(() => buildPracticeSession(modules), [modules]);
+  const review = useMemo(() => buildReviewSession(modules, mastery), [modules, mastery]);
+  // The active session's modules (practice or review), or null when browsing.
+  const [session, setSession] = useState<LearningModule[] | null>(null);
+
+  const recordAttempt = (moduleId: string, standard: string, score: { score: number; maxScore: number }) =>
+    store.recordAttempt({ studentId, moduleId, standard, score: score.score, maxScore: score.maxScore });
+
+  const contrast = accommodations.reverseContrast
+    ? { background: '#000', color: '#fff' }
+    : undefined;
+
+  return (
+    <main
+      style={{ fontFamily: 'system-ui, sans-serif', maxWidth: 900, margin: '0 auto', padding: 16, ...contrast }}
+    >
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <h1>NYSED Test Prep</h1>
+        <h1>{DOMAIN_LABELS[domain]}</h1>
         <span>
-          {studentName} · Grade {grade} · {DOMAIN_LABELS[subject]}{' '}
+          {student.firstName}{' '}
           <button type="button" onClick={onSignOut}>
             Sign out
           </button>
         </span>
       </header>
       <AccommodationsBar />
-      <Toolbar grade={grade} session={2} subject={subject} />
-
-      <section>
-        <h2>Question</h2>
-        {subject === 'math' ? (
-          <p>
-            What is <MathText tex="\frac{1}{2} + \frac{1}{4}" />?
+      {session ? (
+        <PracticeSession
+          modules={session}
+          onRecord={recordAttempt}
+          onExit={() => {
+            setSession(null);
+            setVersion((v) => v + 1);
+          }}
+        />
+      ) : selected ? (
+        <ModulePlayer
+          module={selected}
+          onExit={() => setSelected(null)}
+          onScored={(s) => {
+            recordAttempt(selected.meta.id, selected.meta.standards[0] ?? selected.meta.cluster, s);
+            setVersion((v) => v + 1);
+          }}
+          onVisited={() => {
+            store.markVisited(studentId, selected.meta.id);
+            setVersion((v) => v + 1);
+          }}
+        />
+      ) : (
+        <>
+          <MasterySummary mastery={mastery} />
+          <p style={{ display: 'flex', gap: 8 }}>
+            <button type="button" disabled={practice.length === 0} onClick={() => setSession(practice)}>
+              {practice.length > 0 ? `Start practice (${practice.length})` : 'Start practice'}
+            </button>
+            <button type="button" disabled={review.length === 0} onClick={() => setSession(review)}>
+              Review weak spots
+            </button>
           </p>
-        ) : (
-          <p>Read the passage, then explain how the author develops the central idea.</p>
-        )}
-      </section>
-
-      {sections.graphing ? (
-        <section>
-          <h2>Graphing</h2>
-          <Suspense fallback={<Loading />}>
-            <GraphPlot />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.equationEntry ? (
-        <section>
-          <h2>Equation entry</h2>
-          <Suspense fallback={<Loading />}>
-            <MathField />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.writingSpace ? (
-        <section>
-          <h2>Writing space</h2>
-          <Suspense fallback={<Loading />}>
-            <WritingSpace />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.scratchPaper ? (
-        <section>
-          <h2>Scratch paper</h2>
-          <Suspense fallback={<Loading />}>
-            <ScratchPad />
-          </Suspense>
-        </section>
-      ) : null}
-
-      {sections.calculator ? (
-        <section>
-          <h2>Calculator</h2>
-          <Calculator />
-        </section>
-      ) : null}
+          <ModuleCatalog domain={domain} onOpen={setSelected} engagedIds={engagedIds} />
+        </>
+      )}
     </main>
   );
 }
 
-/** Drives the sign-in flow: login → pick a subject domain → the test shell. */
+/** Drives the flow: login → choose a subject domain → that domain's modules. */
 export function App() {
   const [state, dispatch] = useReducer(portalReducer, initialPortalState);
 
@@ -120,10 +138,9 @@ export function App() {
 
   if (state.step === 'test' && state.student && state.domain) {
     return (
-      <TestShell
-        studentName={state.student.firstName}
-        grade={state.student.grade}
-        subject={state.domain}
+      <DomainHome
+        domain={state.domain}
+        student={state.student}
         onSignOut={() => dispatch({ type: 'sign-out' })}
       />
     );

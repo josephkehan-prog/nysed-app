@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "id": "practice-evaluate-expression",
+    "domain": "math",
+    "cluster": "6.EE",
+    "standards": ["6.EE.A.2"],
+    "title": "Evaluating an Expression",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Evaluate the expression 3x + 4 when x = 5.",
+      "interactionType": "numeric",
+      "answer": { "type": "numeric", "value": 19 },
+      "workedSolution": "Substitute x = 5: 3 × 5 + 4 = 15 + 4 = 19."
+    }
+  ]
+}

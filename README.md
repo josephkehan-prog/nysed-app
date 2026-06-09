@@ -10,7 +10,10 @@ to take the real test — per-grade/per-session tool gating, an expansive tool s
 
 ## Status
 
-- ✅ **95 tests passing** — 75 [Vitest](https://vitest.dev) (web) + 20 [pytest](https://pytest.org) (Python services)
+- ✅ **168 [Vitest](https://vitest.dev) tests passing** — fully client-side; no backend, no Python
+- ✅ **Math + ELA** learning modules — numeric, math-equivalence, choice/multi-select, ordering,
+  number-line, and text items; multi-item modules; ELA reading passages
+- ✅ **Practice & adaptive review** sessions + per-standard mastery, persisted in localStorage
 - ✅ Installable **PWA** — `npm run build` emits `dist/` with `sw.js` + `manifest.webmanifest`
 
 ## Architecture
@@ -24,24 +27,25 @@ to take the real test — per-grade/per-session tool gating, an expansive tool s
 | Accessibility | `src/a11y/accommodations.ts` | text-to-speech, answer masking, reverse contrast |
 | Storage / sessions | `src/server` | `node:sqlite` store, mastery-by-standard, practice-session builder |
 | UI components | `src/components` | KaTeX, Mafs, MathLive, Excalidraw, Tiptap (lazy-loaded) |
-| Math verification | `services/math-verify` | SymPy symbolic equivalence (`is_equivalent`, `verify_key`) |
-| ELA scoring | `services/ela-scoring` | Flesch readability, short-response rubric, passage allow-list |
-| Content pipeline | `pipeline` | OER → QTI transform + Jaccard leakage check |
+| Math equivalence | `src/modules/score.ts` | Compute Engine `isEqual` — browser-side, no backend (½ ≡ 0.5, 2x+3 ≡ 3+2x) |
+| Learning modules | `src/modules`, `src/progress` | module contract, 7 interaction types, multi-item worksheets, player/catalog, practice + adaptive-review sessions; localStorage progress & mastery |
+| Content (Math + ELA) | `src/modules/content` | math practice/explore modules + original CC-BY ELA reading passages (auto-discovered JSON) |
+| Content pipeline | `scripts/ingest-im-tasks.ts` | Illustrative Math PDFs → module JSON (TypeScript, build-time) |
 
 ## Tech stack
 
-React 19 · TypeScript · Vite 8 (PWA) · Vitest · Python (SymPy) · `node:sqlite`
+React 19 · TypeScript · Vite 8 (PWA) · Vitest · `@cortex-js/compute-engine` · `node:sqlite`
 
 ## Getting started
 
 **Prerequisites:** Node **≥ 24** (the storage layer uses the built-in `node:sqlite`, unflagged from
-Node 23.4+), Python **3.12**.
+Node 23.4+).
 
 ### Web app
 
 ```bash
 npm ci          # use `npm ci`, NOT `npm install` — see note below
-npm test        # 75 Vitest tests
+npm test        # 168 Vitest tests
 npm run dev     # local dev server
 npm run build   # production PWA build (dist/)
 ```
@@ -49,15 +53,6 @@ npm run build   # production PWA build (dist/)
 > **Install with `npm ci`.** A `.npmrc` pins `legacy-peer-deps=true` (several UI libs lag React 19
 > in their peer ranges). `npm install --legacy-peer-deps` once silently downgraded Excalidraw and
 > broke the build; `npm ci` installs the exact lockfile.
-
-### Python services
-
-```bash
-python -m venv .venv
-.venv/Scripts/python -m pip install sympy pytest   # Windows
-# source .venv/bin/activate && pip install sympy pytest   # macOS/Linux
-python -m pytest services pipeline                 # 20 tests
-```
 
 ## Content & licensing
 

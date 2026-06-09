@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "id": "ela-lighthouse-keeper",
+    "domain": "ela",
+    "cluster": "6.RL",
+    "standards": ["6.RL.1", "6.RL.2", "6.RL.4"],
+    "title": "The Lighthouse Keeper",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original passage)" }
+  },
+  "passage": "For forty years, Mara climbed the lighthouse stairs each night. The town below had long since switched to electric beacons controlled by machines, and the harbor master often reminded her that her lamp was no longer needed. Still, Mara polished the great glass lens until it gleamed. One stormy evening, the town's power failed, and the automatic beacon went dark. Ships drifted dangerously close to the rocks. High above, a single steady light cut through the rain — Mara's lamp, burning as it always had. By morning, every vessel had reached the harbor safely, and no one spoke again of shutting the old lighthouse down.",
+  "items": [
+    {
+      "stem": "Which statement best expresses a theme of the passage?",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "New technology is always better than old methods." },
+          { "id": "b", "label": "Dedication and preparation can prove their worth in a crisis." },
+          { "id": "c", "label": "Storms are dangerous for ships sailing near rocks." },
+          { "id": "d", "label": "Towns should never change their traditions." }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["b"] },
+      "workedSolution": "Mara keeps her lamp ready for forty years even when told it is unneeded; when the modern system fails, her preparation saves the ships. That payoff points to choice B."
+    },
+    {
+      "stem": "Which detail best supports the idea that Mara stayed dedicated even when others doubted her?",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "\"The town below had long since switched to electric beacons.\"" },
+          { "id": "b", "label": "\"Still, Mara polished the great glass lens until it gleamed.\"" },
+          { "id": "c", "label": "\"Ships drifted dangerously close to the rocks.\"" },
+          { "id": "d", "label": "\"By morning, every vessel had reached the harbor safely.\"" }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["b"] },
+      "workedSolution": "The word \"Still\" signals that Mara kept up her careful work despite the town moving on — direct evidence of her dedication."
+    },
+    {
+      "stem": "In the passage, the word \"vessel\" most nearly means —",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "a container for holding liquid" },
+          { "id": "b", "label": "a ship or boat" },
+          { "id": "c", "label": "a narrow tube in the body" },
+          { "id": "d", "label": "a lighthouse" }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["b"] },
+      "workedSolution": "\"Vessel\" can mean a container, but here it describes things that \"reached the harbor,\" so it means a ship or boat."
+    }
+  ]
+}

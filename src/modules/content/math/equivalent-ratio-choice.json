@@ -1,0 +1,27 @@
+{
+  "meta": {
+    "id": "practice-equivalent-ratio",
+    "domain": "math",
+    "cluster": "6.RP",
+    "standards": ["6.RP.A.1"],
+    "title": "Equivalent Ratios",
+    "kind": "practice",
+    "source": { "name": "NYSED Test Prep", "license": "CC BY 4.0", "attribution": "NYSED Test Prep (original practice item)" }
+  },
+  "items": [
+    {
+      "stem": "Which ratio is equivalent to 2 : 3?",
+      "interactionType": "choice",
+      "config": {
+        "choices": [
+          { "id": "a", "label": "4 : 6" },
+          { "id": "b", "label": "3 : 2" },
+          { "id": "c", "label": "6 : 8" },
+          { "id": "d", "label": "2 : 5" }
+        ]
+      },
+      "answer": { "type": "choice", "correct": ["a"] },
+      "workedSolution": "Multiply both parts of 2 : 3 by 2 to get 4 : 6, so 2 : 3 = 4 : 6."
+    }
+  ]
+}
