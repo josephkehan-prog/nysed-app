@@ -72,5 +72,10 @@ export function scoreResponse(item: PracticeItem, response: ResponsePayload): Sc
       const ok = answer.accept.some((a) => norm(a) === norm(response.text));
       return { score: ok ? maxScore : 0, maxScore };
     }
+    case 'order': {
+      if (answer.type !== 'order') return wrong;
+      const decl: ResponseDeclaration = { cardinality: 'ordered', correctResponse: answer.correctOrder };
+      return scoreItem(decl, response.ordered);
+    }
   }
 }

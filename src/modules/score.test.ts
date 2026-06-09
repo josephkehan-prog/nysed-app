@@ -59,6 +59,12 @@ describe('scoreResponse', () => {
     expect(scoreResponse(t, { type: 'text', text: 'wrong' })?.score).toBe(0);
   });
 
+  it('scores an ordering answer by sequence', () => {
+    const o = item({ interactionType: 'order', answer: { type: 'order', correctOrder: ['a', 'b', 'c'] } });
+    expect(scoreResponse(o, { type: 'order', ordered: ['a', 'b', 'c'] })?.score).toBe(1);
+    expect(scoreResponse(o, { type: 'order', ordered: ['b', 'a', 'c'] })?.score).toBe(0);
+  });
+
   it('returns null for an explore item (no answer)', () => {
     const e = item({ interactionType: 'text', workedSolution: 'see solution' });
     expect(scoreResponse(e, { type: 'text', text: 'anything' })).toBeNull();

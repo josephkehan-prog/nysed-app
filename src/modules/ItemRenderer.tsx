@@ -90,6 +90,44 @@ export function ItemRenderer({ item, value, onChange, disabled }: ItemRendererPr
         </label>
       );
     }
+    case 'order': {
+      const tokens = item.config?.tokens ?? [];
+      const order =
+        value?.type === 'order' && value.ordered.length ? value.ordered : tokens.map((t) => t.id);
+      const labelOf = (id: string) => tokens.find((t) => t.id === id)?.label ?? id;
+      const move = (i: number, dir: -1 | 1) => {
+        const j = i + dir;
+        if (j < 0 || j >= order.length) return;
+        const next = [...order];
+        [next[i], next[j]] = [next[j], next[i]];
+        onChange({ type: 'order', ordered: next });
+      };
+      return (
+        <ol>
+          {order.map((id, i) => (
+            <li key={id}>
+              {labelOf(id)}{' '}
+              <button
+                type="button"
+                aria-label={`Move ${labelOf(id)} up`}
+                disabled={disabled || i === 0}
+                onClick={() => move(i, -1)}
+              >
+                ↑
+              </button>
+              <button
+                type="button"
+                aria-label={`Move ${labelOf(id)} down`}
+                disabled={disabled || i === order.length - 1}
+                onClick={() => move(i, 1)}
+              >
+                ↓
+              </button>
+            </li>
+          ))}
+        </ol>
+      );
+    }
     case 'text':
     default: {
       const v = value?.type === 'text' ? value.text : '';

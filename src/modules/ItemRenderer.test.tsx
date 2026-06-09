@@ -43,6 +43,23 @@ describe('ItemRenderer', () => {
     expect(onChange).toHaveBeenCalledWith({ type: 'choice', selected: ['b'] });
   });
 
+  it('order: emits the reordered sequence when a token is moved up', () => {
+    const onChange = vi.fn();
+    const ordered = base({
+      interactionType: 'order',
+      config: {
+        tokens: [
+          { id: 'a', label: 'First' },
+          { id: 'b', label: 'Second' },
+          { id: 'c', label: 'Third' },
+        ],
+      },
+    });
+    render(<ItemRenderer item={ordered} value={null} onChange={onChange} />);
+    fireEvent.click(screen.getByRole('button', { name: /move second up/i }));
+    expect(onChange).toHaveBeenCalledWith({ type: 'order', ordered: ['b', 'a', 'c'] });
+  });
+
   it('choice: masks options until revealed when answer masking is on', () => {
     const item = base({
       interactionType: 'choice',

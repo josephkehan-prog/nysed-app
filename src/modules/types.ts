@@ -5,7 +5,7 @@ import type { Subject } from '../nextera/tools';
 
 export type Domain = Subject; // 'math' | 'ela' — math first
 
-export type InteractionType = 'numeric' | 'math' | 'choice' | 'text';
+export type InteractionType = 'numeric' | 'math' | 'choice' | 'text' | 'order';
 
 export interface ChoiceOption {
   id: string;
@@ -16,6 +16,8 @@ export interface ChoiceOption {
 export interface ItemConfig {
   /** choice: the options to render. */
   choices?: ChoiceOption[];
+  /** order: the tokens to arrange (initial display order). */
+  tokens?: ChoiceOption[];
   /** choice: allow more than one selection. */
   multiple?: boolean;
   /** numeric: absolute tolerance for a correct value (default 0). */
@@ -29,14 +31,16 @@ export type AnswerSpec =
   | { type: 'numeric'; value: number; tolerance?: number }
   | { type: 'math'; expected: string } // LaTeX, compared via Compute Engine
   | { type: 'choice'; correct: string[] } // option ids
-  | { type: 'text'; accept: string[] }; // accepted answers (compared normalized)
+  | { type: 'text'; accept: string[] } // accepted answers (compared normalized)
+  | { type: 'order'; correctOrder: string[] }; // token ids in the correct sequence
 
 /** What a controlled widget emits / what the player scores. Carries no keys. */
 export type ResponsePayload =
   | { type: 'numeric'; value: number | null }
   | { type: 'math'; latex: string }
   | { type: 'choice'; selected: string[] }
-  | { type: 'text'; text: string };
+  | { type: 'text'; text: string }
+  | { type: 'order'; ordered: string[] };
 
 export type ModuleKind = 'practice' | 'explore'; // practice = auto-scored; explore = worked-solution reveal
 
